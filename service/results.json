@@ -1,0 +1,383 @@
+{
+  "timestamp": "2025-09-05T12:35:26.063423",
+  "results": {
+    "query": "Challenges in evaluating LLM-powered search quality",
+    "providers": [
+      "ddg",
+      "wikipedia"
+    ],
+    "ablation_results": [
+      {
+        "ddg": {
+          "top_results": [
+            "SearchResult(title='Demystifying LLM Evaluation Frameworks:A Closer Look at \u2026', url='https://insights.pecb.com/demystifying-llm-evaluation-frameworks-a-closer-look-at-metrics-and-oversight/', snippet='Sep 27, 2024 \u00b7 While the current status of maturity in LLM evaluation frameworks is evolving rapidly, there are still significant challenges and limitations that need to be addressed to ensure that LLMs can be deployed with confidence and responsibly.', provider='ddg')",
+            "SearchResult(title='Classement 2025 : les 500 fortunes de France ont perdu 100', url='https://www.challenges.fr/fortunes/classement-2025-les-500-fortunes-de-france-ont-perdu-100-milliards-deuros-en-un-an_615662', snippet='Jul 8, 2025 \u00b7 Le compte \u00e0 rebours est lanc\u00e9. Mercredi \u00e0 midi, Challenges va d\u00e9voiler son classement 2025 des 500 fortunes professionnelles de France.', provider='ddg')",
+            "SearchResult(title='LLM for Search Evaluation | Apr 30, 2025 - nibelung.ai', url='https://www.nibelung.ai/post/llm-for-search-evaluation', snippet='Several foundational studies published between 2023 and 2025 reveal both the capabilities and limitations of current LLMs in this domain. In this article, we will review the main research works: \u2022 Thomas et al. (Microsoft Research) \u2014 on LLMs\u2019 ability to predict user preferences (arXiv:2309.10621)', provider='ddg')",
+            "SearchResult(title='LLM Evaluation: Metrics, Best Practices & Challenges - diSearch', url='https://disearch.ai/blog/llm-evaluation/', snippet=\"Jul 22, 2024 \u00b7 4. What are some challenges in LLM evaluation? Many metrics focus on specific tasks or linguistic properties, potentially missing the LLM's broader capabilities or limitations. \u2026\", provider='ddg')",
+            "SearchResult(title='LLM Evaluations: Techniques, Challenges, and Best Practices', url='https://labelstud.io/blog/llm-evaluations-techniques-challenges-and-best-practices/', snippet=\"Aug 29, 2024 \u00b7 LLM systems are inherently complex, and every modification\u2014whether it's a tweak to hyperparameters, changes in prompts, adjustments to datasets, or even the incorporation of \u2026\", provider='ddg')"
+          ],
+          "evaluation": 0.8106666666666668,
+          "timing": "TimingStats(search_ms=13344.733119010925, embed_ms=163.99192810058594, rerank_ms=0.0, judge_ms=0.2818107604980469, total_ms=26853.50799560547)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 15.559000999999999,
+            "per_doc_p95_us": 44.030998000000004,
+            "docs_scored": 28
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 0.6,
+            "attr_recall": 1.2,
+            "supported_sentences": 6,
+            "total_sentences": 10,
+            "claim_precision": 0.8333333333333334,
+            "claim_recall": 1.0,
+            "supported_claims": 5,
+            "total_claims": 6
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 0.8,
+              "redundancy": 0.0819083250453904,
+              "budget": 0.04282494488944221
+            },
+            "raw_response": "Breadth: 4 topics, Redundancy: 0.08, Budget: 0.04"
+          }
+        },
+        "wikipedia": {
+          "top_results": [
+            "SearchResult(title='Smart city', url='https://en.wikipedia.org/wiki/Smart_city', snippet='<p class=\"mw-empty-elt\">\\n</p>\\n\\n\\n<p>A <b>smart city</b> is an urban model that leverages technology, human capital, and governance to enhance sustainability, efficiency, and social inclusion, considered key goals for the cities of the future. Smart cities uses digital technology to collect data and operate services. Data is collected from citizens, devices, buildings, or cameras. Applications include traffic and transportation systems, power plants, utilities, urban forestry, water supply network', provider='wikipedia')",
+            "SearchResult(title='University of Melbourne', url='https://en.wikipedia.org/wiki/University_of_Melbourne', snippet='<p class=\"mw-empty-elt\">\\n\\n</p>\\n\\n<p>The <b>University of Melbourne</b> (colloquially known as <b>Melbourne University</b>) is a public research university located in Melbourne, Australia. Founded in 1853, it is Australia\\'s second oldest university and the oldest in the state of Victoria. Its main campus is located in Parkville, an inner suburb north of Melbourne\\'s central business district, with several other campuses located across the state of Victoria.\\n</p><p>Incorporated in the 19th century b', provider='wikipedia')",
+            "SearchResult(title='AI alignment', url='https://en.wikipedia.org/wiki/AI_alignment', snippet='<p class=\"mw-empty-elt\">\\n\\n</p>\\n\\n<p>In the field of artificial intelligence (AI), <b>alignment</b> aims to steer AI systems toward a person\\'s or group\\'s intended goals, preferences, or ethical principles. An AI system is considered <i>aligned</i> if it advances the intended objectives. A <i>misaligned</i> AI system pursues unintended objectives.\\n</p><p>It is often challenging for AI designers to align an AI system because it is difficult for them to specify the full range of desired and undesired', provider='wikipedia')",
+            "SearchResult(title='Lukas Biewald', url='https://en.wikipedia.org/wiki/Lukas_Biewald', snippet='<p class=\"mw-empty-elt\">\\n</p>\\n\\n<p><b>Lukas Biewald</b> (born 1981) is an American entrepreneur and a prominent figure in artificial intelligence. He is recognized for his contributions to machine learning and as the CEO and co-founder of Weights &amp; Biases, a company that builds developer tools for AI. He previously founded and was CEO of Figure Eight, a human-in-the-loop machine learning platform. He has co-authored 26 AI research papers from 2004 through 2018, including <i>Massive multiplaye', provider='wikipedia')",
+            "SearchResult(title='Language model benchmark', url='https://en.wikipedia.org/wiki/Language_model_benchmark', snippet='<p class=\"mw-empty-elt\">\\n</p>\\n\\n\\n<p><b>Language model benchmark</b> is a standardized test designed to evaluate the performance of language model on various natural language processing tasks. These tests are intended for comparing different models\\' capabilities in areas such as language understanding, generation, and reasoning.\\n</p><p>Benchmarks generally consist of a dataset and corresponding evaluation metrics. The dataset provides text samples and annotations, while the metrics measure a model', provider='wikipedia')"
+          ],
+          "evaluation": 0.7093333333333334,
+          "timing": "TimingStats(search_ms=13344.733119010925, embed_ms=163.99192810058594, rerank_ms=0.0, judge_ms=0.2818107604980469, total_ms=26853.50799560547)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 34.811,
+            "per_doc_p95_us": 160.44499000000002,
+            "docs_scored": 26
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 0.3,
+            "attr_recall": 1.2,
+            "supported_sentences": 6,
+            "total_sentences": 20,
+            "claim_precision": 0.3333333333333333,
+            "claim_recall": 1.0,
+            "supported_claims": 5,
+            "total_claims": 15
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 1.0,
+              "redundancy": 0.10961897827772807,
+              "budget": 0.01489563300502338
+            },
+            "raw_response": "Breadth: 6 topics, Redundancy: 0.11, Budget: 0.01"
+          }
+        },
+        "ablation_config": {
+          "late": "off",
+          "prune": "none",
+          "name": "Single-vector baseline"
+        }
+      },
+      {
+        "ddg": {
+          "top_results": [
+            "SearchResult(title='LLM Evaluation: Metrics, Best Practices & Challenges - diSearch', url='https://disearch.ai/blog/llm-evaluation/', snippet=\"Jul 22, 2024 \u00b7 4. What are some challenges in LLM evaluation? Many metrics focus on specific tasks or linguistic properties, potentially missing the LLM's broader capabilities or limitations. Furthermore, evaluation metrics can perpetuate biases present in the LLM's training data if not carefully selected.\", provider='ddg')",
+            "SearchResult(title='LLM Evaluations: Techniques, Challenges, and Best Practices', url='https://labelstud.io/blog/llm-evaluations-techniques-challenges-and-best-practices/', snippet=\"Aug 29, 2024 \u00b7 LLM systems are inherently complex, and every modification\u2014whether it's a tweak to hyperparameters, changes in prompts, adjustments to datasets, or even the incorporation of LLM-as-a-Judge techniques\u2014can lead to significant shifts in output.\", provider='ddg')",
+            "SearchResult(title='A Survey of LLM-based Deep Search Agents: Paradigm ... - Medium', url='https://medium.com/data-science-in-your-pocket/a-survey-of-llm-based-deep-search-agents-paradigm-optimization-evaluation-and-challenges-666f0de246c3', snippet='Aug 19, 2025 \u00b7 This survey reveals that search agents represent a fundamental paradigm shift from passive information retrieval to proactive, intelligent information seeking.', provider='ddg')",
+            "SearchResult(title='Mastering LLM Evaluation: Metrics and Challenges - Medium', url='https://medium.com/@abhisekprasad8/mastering-llm-evaluation-metrics-and-challenges-7d6f9436a43c', snippet='Jul 9, 2024 \u00b7 Although evaluating the outputs of Large Language Models (LLMs) is essential for anyone looking to ship robust LLM applications, LLM evaluation remains a challenging task for many.', provider='ddg')",
+            "SearchResult(title='LLM Evaluation 101: Best Practices, Challenges & Proven \u2026', url='https://langfuse.com/blog/2025-03-04-llm-evaluation-101-best-practices-and-challenges', snippet='Mar 4, 2025 \u00b7 In this post, we\u2019ll walk through some tried-and-true best practices, common pitfalls, and handy tips to help you benchmark your LLM\u2019s performance. Whether you\u2019re just starting \u2026', provider='ddg')"
+          ],
+          "evaluation": 0.8196666666666668,
+          "timing": "TimingStats(search_ms=13676.080107688904, embed_ms=125.64396858215332, rerank_ms=0.0, judge_ms=0.32830238342285156, total_ms=27477.855920791626)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 19.971,
+            "per_doc_p95_us": 94.229,
+            "docs_scored": 18
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 0.6666666666666666,
+            "attr_recall": 1.2,
+            "supported_sentences": 6,
+            "total_sentences": 9,
+            "claim_precision": 0.8571428571428571,
+            "claim_recall": 1.2,
+            "supported_claims": 6,
+            "total_claims": 7
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 1.0,
+              "redundancy": 0.092791520317721,
+              "budget": 0.052769765012954696
+            },
+            "raw_response": "Breadth: 6 topics, Redundancy: 0.09, Budget: 0.05"
+          }
+        },
+        "wikipedia": {
+          "top_results": [
+            "SearchResult(title='Artificial general intelligence', url='https://en.wikipedia.org/wiki/Artificial_general_intelligence', snippet='<p class=\"mw-empty-elt\">\\n\\n</p>\\n\\n<p><b>Artificial general intelligence</b> (<b>AGI</b>)\u2014sometimes called <b>human\u2011level intelligence AI</b>\u2014is a type of artificial intelligence that would match or surpass human capabilities across virtually all cognitive tasks.\\n</p><p>Some researchers argue that state\u2011of\u2011the\u2011art large language models (LLMs) already exhibit signs of AGI\u2011level capability, while others maintain that genuine AGI has not yet been achieved. Beyond AGI, artificial superintelligence (ASI', provider='wikipedia')",
+            "SearchResult(title='Gemini (language model)', url='https://en.wikipedia.org/wiki/Gemini_(language_model)', snippet='<p class=\"mw-empty-elt\">\\n\\n</p>\\n\\n<p><b>Gemini</b> is a family of multimodal large language models (LLMs) developed by Google DeepMind, and the successor to LaMDA and PaLM 2. Comprising Gemini Ultra, Gemini Pro, Gemini Flash, and Gemini Nano, it was announced on December 6, 2023, positioned as a competitor to OpenAI\\'s GPT-4. It powers the chatbot of the same name. In March 2025, Gemini 2.5 Pro Experimental was rated as highly competitive.\\n</p>', provider='wikipedia')",
+            "SearchResult(title='Retrieval-augmented generation', url='https://en.wikipedia.org/wiki/Retrieval-augmented_generation', snippet=\"<p><b>Retrieval-augmented generation</b> (<b>RAG</b>) is a technique that enables large language models (LLMs) to retrieve and incorporate new information. With RAG, LLMs do not respond to user queries until they refer to a specified set of documents. These documents supplement information from the LLM's pre-existing training data. This allows LLMs to use domain-specific and/or updated information that is not available in the training data. For example, this helps LLM-based chatbots access inter\", provider='wikipedia')",
+            "SearchResult(title='University of Melbourne', url='https://en.wikipedia.org/wiki/University_of_Melbourne', snippet='<p class=\"mw-empty-elt\">\\n\\n</p>\\n\\n<p>The <b>University of Melbourne</b> (colloquially known as <b>Melbourne University</b>) is a public research university located in Melbourne, Australia. Founded in 1853, it is Australia\\'s second oldest university and the oldest in the state of Victoria. Its main campus is located in Parkville, an inner suburb north of Melbourne\\'s central business district, with several other campuses located across the state of Victoria.\\n</p><p>Incorporated in the 19th century b', provider='wikipedia')",
+            "SearchResult(title='Language model benchmark', url='https://en.wikipedia.org/wiki/Language_model_benchmark', snippet='<p class=\"mw-empty-elt\">\\n</p>\\n\\n\\n<p><b>Language model benchmark</b> is a standardized test designed to evaluate the performance of language model on various natural language processing tasks. These tests are intended for comparing different models\\' capabilities in areas such as language understanding, generation, and reasoning.\\n</p><p>Benchmarks generally consist of a dataset and corresponding evaluation metrics. The dataset provides text samples and annotations, while the metrics measure a model', provider='wikipedia')"
+          ],
+          "evaluation": 0.7746666666666667,
+          "timing": "TimingStats(search_ms=13676.080107688904, embed_ms=125.64396858215332, rerank_ms=0.0, judge_ms=0.32830238342285156, total_ms=27477.855920791626)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 31.972,
+            "per_doc_p95_us": 899.422,
+            "docs_scored": 26
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 0.3333333333333333,
+            "attr_recall": 1.4,
+            "supported_sentences": 7,
+            "total_sentences": 21,
+            "claim_precision": 0.3333333333333333,
+            "claim_recall": 1.0,
+            "supported_claims": 5,
+            "total_claims": 15
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 1.0,
+              "redundancy": 0.09268441464833235,
+              "budget": 0.01819647069412231
+            },
+            "raw_response": "Breadth: 5 topics, Redundancy: 0.09, Budget: 0.02"
+          }
+        },
+        "ablation_config": {
+          "late": "on",
+          "prune": "none",
+          "name": "Late-interaction, no pruning"
+        }
+      },
+      {
+        "ddg": {
+          "top_results": [
+            "SearchResult(title='LLM Evaluation: Metrics, Best Practices & Challenges - diSearch', url='https://disearch.ai/blog/llm-evaluation/', snippet=\"Jul 22, 2024 \u00b7 4. What are some challenges in LLM evaluation? Many metrics focus on specific tasks or linguistic properties, potentially missing the LLM's broader capabilities or limitations. \u2026\", provider='ddg')",
+            "SearchResult(title='New Research Paper on Advances and Challenges in Evaluating LLM \u2026', url='https://naep-research.airprojects.org/R-D-Hub/new-research-paper-on-advances-and-challenges-in-evaluating-llm-based-applications', snippet='Jun 7, 2024 \u00b7 Human evaluation, considered the gold standard for LLM assessment, faces major problems related to repeatability and human biases. Effective evaluation methods are critical \u2026', provider='ddg')",
+            "SearchResult(title='Best-Practices & Challenges in LLM evaluations', url='https://curiousmindme.substack.com/p/best-practices-and-challenges-in', snippet='Evaluating LLMs can be quite hard and error prone. This comes down to the nature of the problem at hand. Often times developing a strong foundation for evaluation is quite important.', provider='ddg')",
+            "SearchResult(title='Beyond Rule-Based Data Quality: Exploring LLM-Powered \u2026', url='https://medium.com/@fhuthmacher/beyond-rule-based-data-quality-exploring-llm-powered-anomaly-detection-9a0c7c98c690', snippet='Nov 29, 2024 \u00b7 In this blog we evaluate how effective an LLM can be in identifying data quality issues in numeric datasets, how different prompt engineering techniques effect its accuracy, \u2026', provider='ddg')",
+            "SearchResult(title='LLM Evaluation: Key Metrics, Challenges, and Best Practices', url='https://averybit.com/llm-evaluation-key-metrics-challenges-and-best-practices/', snippet='Nov 19, 2024 \u00b7 What are the Challenges in LLM Evaluation? Human evaluations might differ greatly based on personal preferences, contextual awareness, and peculiarities of culture. \u2026', provider='ddg')"
+          ],
+          "evaluation": 0.806,
+          "timing": "TimingStats(search_ms=11605.621457099915, embed_ms=115.2791976928711, rerank_ms=0.0, judge_ms=0.1919269561767578, total_ms=23326.56717300415)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 18.079,
+            "per_doc_p95_us": 52.371,
+            "docs_scored": 15
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 0.36363636363636365,
+            "attr_recall": 0.8,
+            "supported_sentences": 4,
+            "total_sentences": 11,
+            "claim_precision": 0.4444444444444444,
+            "claim_recall": 0.8,
+            "supported_claims": 4,
+            "total_claims": 9
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 1.0,
+              "redundancy": 0.13026210098643753,
+              "budget": 0.09216958432221421
+            },
+            "raw_response": "Breadth: 6 topics, Redundancy: 0.13, Budget: 0.09"
+          }
+        },
+        "wikipedia": {
+          "top_results": [
+            "SearchResult(title='Neural scaling law', url='https://en.wikipedia.org/wiki/Neural_scaling_law', snippet='<p>In machine learning, a <b>neural scaling law</b> is an empirical scaling law that describes how neural network performance changes as key factors are scaled up or down. These factors typically include the number of parameters, training dataset size, and training cost. Some models also exhibit performance gains by scaling inference through increased test-time compute, extending neural scaling laws beyond training to the deployment phase.\\n</p>', provider='wikipedia')",
+            "SearchResult(title='Smart city', url='https://en.wikipedia.org/wiki/Smart_city', snippet='<p class=\"mw-empty-elt\">\\n</p>\\n\\n\\n<p>A <b>smart city</b> is an urban model that leverages technology, human capital, and governance to enhance sustainability, efficiency, and social inclusion, considered key goals for the cities of the future. Smart cities uses digital technology to collect data and operate services. Data is collected from citizens, devices, buildings, or cameras. Applications include traffic and transportation systems, power plants, utilities, urban forestry, water supply network', provider='wikipedia')",
+            "SearchResult(title='Search engine results page', url='https://en.wikipedia.org/wiki/Search_engine_results_page', snippet=\"<p>A <b>search engine results page</b> (<b>SERP</b>) is a webpage that is displayed by a search engine in response to a query by a user. The main component of a SERP is the listing of results that are returned by the search engine in response to a keyword query.\\n</p><p>The results are of two general types:\\n</p>\\n<ul><li>organic search: retrieved by the search engine's algorithm;</li>\\n<li>sponsored search: advertisements.</li></ul>\\n<p>The results are normally ranked by relevance to the query. Each\", provider='wikipedia')",
+            "SearchResult(title='AI-driven design automation', url='https://en.wikipedia.org/wiki/AI-driven_design_automation', snippet='<p class=\"mw-empty-elt\">\\n</p><p><b>AI-driven design automation</b> is the use of artificial intelligence (AI) to automate and improve different parts of the electronic design automation (EDA) process.  It is particularly important in the design of integrated circuits (chips) and complex electronic systems, where it can potentially increase productivity, decrease costs, and speed up design cycles. AI Driven Design Automation uses several methods, including machine learning, expert systems, and re', provider='wikipedia')",
+            "SearchResult(title='Language model benchmark', url='https://en.wikipedia.org/wiki/Language_model_benchmark', snippet='<p class=\"mw-empty-elt\">\\n</p>\\n\\n\\n<p><b>Language model benchmark</b> is a standardized test designed to evaluate the performance of language model on various natural language processing tasks. These tests are intended for comparing different models\\' capabilities in areas such as language understanding, generation, and reasoning.\\n</p><p>Benchmarks generally consist of a dataset and corresponding evaluation metrics. The dataset provides text samples and annotations, while the metrics measure a model', provider='wikipedia')"
+          ],
+          "evaluation": 0.74,
+          "timing": "TimingStats(search_ms=11605.621457099915, embed_ms=115.2791976928711, rerank_ms=0.0, judge_ms=0.1919269561767578, total_ms=23326.56717300415)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 28.516,
+            "per_doc_p95_us": 51.625,
+            "docs_scored": 26
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 0.2777777777777778,
+            "attr_recall": 1.0,
+            "supported_sentences": 5,
+            "total_sentences": 18,
+            "claim_precision": 0.38461538461538464,
+            "claim_recall": 1.0,
+            "supported_claims": 5,
+            "total_claims": 13
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 1.0,
+              "redundancy": 0.09059827394501355,
+              "budget": 0.03000870187234881
+            },
+            "raw_response": "Breadth: 6 topics, Redundancy: 0.09, Budget: 0.03"
+          }
+        },
+        "ablation_config": {
+          "late": "on",
+          "prune": "16/64",
+          "name": "Late-interaction, 16/64 pruning"
+        }
+      },
+      {
+        "ddg": {
+          "top_results": [
+            "SearchResult(title='LLM evaluation framework: principles, practices, and tools', url='https://toloka.ai/blog/llm-evaluation-framework-principles-practices-and-tools/', snippet='Learn how to design a robust LLM evaluation framework to measure and improve large language model performance. Explore metrics, datasets, and best practices for scalable, responsible AI deployment.', provider='ddg')",
+            "SearchResult(title='How to Evaluate LLMs: Methods, Metrics & Tools', url='https://blog.promptlayer.com/how-to-evaluate-llm/', snippet='Mar 27, 2025 \u00b7 Learn how to evaluate LLM performance. This guide covers key methodologies, metrics (automated & human), strategies, tools & best practices.', provider='ddg')",
+            "SearchResult(title='An Empirical Study on Challenges for LLM Application Developers', url='https://dl.acm.org/doi/10.1145/3715007', snippet='Aug 17, 2025 \u00b7 We first examine their popularity and difficulty. After manually analyzing 2,364 sampled questions, we construct a taxonomy of challenges faced by LLM developers. Based \u2026', provider='ddg')",
+            "SearchResult(title='Best-Practices & Challenges in LLM evaluations', url='https://curiousmindme.substack.com/p/best-practices-and-challenges-in', snippet='Evaluating LLMs can be quite hard and error prone. This comes down to the nature of the problem at hand. Often times developing a strong foundation for evaluation is quite important.', provider='ddg')",
+            "SearchResult(title='LLM for Search Evaluation | Apr 30, 2025 - nibelung.ai', url='https://www.nibelung.ai/post/llm-for-search-evaluation', snippet='Several foundational studies published between 2023 and 2025 reveal both the capabilities and limitations of current LLMs in this domain. In this article, we will review the main research works: \u2022 Thomas et al. (Microsoft Research) \u2014 on LLMs\u2019 ability to predict user preferences (arXiv:2309.10621)', provider='ddg')"
+          ],
+          "evaluation": 0.7956666666666667,
+          "timing": "TimingStats(search_ms=12522.979617118835, embed_ms=130.24616241455078, rerank_ms=0.0, judge_ms=0.1919269561767578, total_ms=25176.247119903564)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 16.417,
+            "per_doc_p95_us": 47.196000000000005,
+            "docs_scored": 30
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 0.3333333333333333,
+            "attr_recall": 0.8,
+            "supported_sentences": 4,
+            "total_sentences": 12,
+            "claim_precision": 0.5,
+            "claim_recall": 0.6,
+            "supported_claims": 3,
+            "total_claims": 6
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 1.0,
+              "redundancy": 0.08769937873679176,
+              "budget": 0.04567797553475893
+            },
+            "raw_response": "Breadth: 5 topics, Redundancy: 0.09, Budget: 0.05"
+          }
+        },
+        "wikipedia": {
+          "top_results": [
+            "SearchResult(title='Retrieval-augmented generation', url='https://en.wikipedia.org/wiki/Retrieval-augmented_generation', snippet=\"<p><b>Retrieval-augmented generation</b> (<b>RAG</b>) is a technique that enables large language models (LLMs) to retrieve and incorporate new information. With RAG, LLMs do not respond to user queries until they refer to a specified set of documents. These documents supplement information from the LLM's pre-existing training data. This allows LLMs to use domain-specific and/or updated information that is not available in the training data. For example, this helps LLM-based chatbots access inter\", provider='wikipedia')",
+            "SearchResult(title='List of datasets for machine-learning research', url='https://en.wikipedia.org/wiki/List_of_datasets_for_machine-learning_research', snippet='<p class=\"mw-empty-elt\">\\n</p>\\n\\n<p class=\"mw-empty-elt\">\\n</p>\\n\\n<p>These datasets are used in machine learning (ML) research and have been cited in peer-reviewed academic journals. Datasets are an integral part of the field of machine learning. Major advances in this field can result from advances in learning algorithms (such as deep learning), computer hardware, and, less-intuitively, the availability of high-quality training datasets. High-quality labeled training datasets for supervised and sem', provider='wikipedia')",
+            "SearchResult(title='PaLM', url='https://en.wikipedia.org/wiki/PaLM', snippet='<p><b>PaLM</b> (<b>Pathways Language Model</b>) is a 540 billion-parameter dense decoder-only transformer-based large language model (LLM) developed by Google AI. Researchers also trained smaller versions of PaLM (with 8 and 62 billion parameters) to test the effects of model scale.\\n</p>', provider='wikipedia')",
+            "SearchResult(title='Neural scaling law', url='https://en.wikipedia.org/wiki/Neural_scaling_law', snippet='<p>In machine learning, a <b>neural scaling law</b> is an empirical scaling law that describes how neural network performance changes as key factors are scaled up or down. These factors typically include the number of parameters, training dataset size, and training cost. Some models also exhibit performance gains by scaling inference through increased test-time compute, extending neural scaling laws beyond training to the deployment phase.\\n</p>', provider='wikipedia')",
+            "SearchResult(title='Computer chess', url='https://en.wikipedia.org/wiki/Computer_chess', snippet='<p><b>Computer chess</b> includes both hardware (dedicated computers) and software capable of playing chess. Computer chess provides opportunities for players to practice even in the absence of human opponents, and also provides opportunities for analysis, entertainment and training. Computer chess applications that play at the level of a chess grandmaster or higher are available on hardware from supercomputers to smart phones. Standalone chess-playing machines are also available. Stockfish, Lee', provider='wikipedia')"
+          ],
+          "evaluation": 0.7493333333333334,
+          "timing": "TimingStats(search_ms=12522.979617118835, embed_ms=130.24616241455078, rerank_ms=0.0, judge_ms=0.1919269561767578, total_ms=25176.247119903564)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 31.891997999999997,
+            "per_doc_p95_us": 51.354,
+            "docs_scored": 26
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 0.21052631578947367,
+            "attr_recall": 0.8,
+            "supported_sentences": 4,
+            "total_sentences": 19,
+            "claim_precision": 0.25,
+            "claim_recall": 0.8,
+            "supported_claims": 4,
+            "total_claims": 16
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 0.8,
+              "redundancy": 0.08503450888620326,
+              "budget": 0.01588799149035093
+            },
+            "raw_response": "Breadth: 4 topics, Redundancy: 0.09, Budget: 0.02"
+          }
+        },
+        "ablation_config": {
+          "late": "on",
+          "prune": "8/32",
+          "name": "Late-interaction, 8/32 pruning"
+        }
+      }
+    ],
+    "timestamp": 1757100926.060213
+  },
+  "summary": {
+    "total_providers": 2,
+    "best_provider": "ddg",
+    "best_score": 0.7956666666666667,
+    "total_results": 10
+  }
+}

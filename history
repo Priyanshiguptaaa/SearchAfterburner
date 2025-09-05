@@ -1,0 +1,119 @@
+cd exa-showdown && source .venv/bin/activate && python3 backend_server.py
+python3 backend_server.py
+python3 backend_server.py
+cd /Users/priyanshigupta/Hackathons/LateInteractionReranker/exa-showdown/ranker-rs && RUST_LOG=info cargo run --release &
+cd /Users/priyanshigupta/Hackathons/LateInteractionReranker && mkdir -p exa-showdown/orchestrator exa-showdown/ranker-rs/src exa-showdown/data
+chmod +x /Users/priyanshigupta/Hackathons/LateInteractionReranker/exa-showdown/demo.sh
+cd /Users/priyanshigupta/Hackathons/LateInteractionReranker/exa-showdown/ranker-rs && cargo check
+cargo check
+cargo build --release
+cd /Users/priyanshigupta/Hackathons/LateInteractionReranker/exa-showdown && python3 -m venv .venv
+source .venv/bin/activate && pip install -r requirements.txt
+source .venv/bin/activate && pip install --upgrade pip
+source .venv/bin/activate && pip install numpy scikit-learn httpx tabulate
+source .venv/bin/activate && pip install duckduckgo-search
+source .venv/bin/activate && pip install --no-build-isolation sentence-transformers
+source .venv/bin/activate && pip install setuptools wheel
+sleep 5 && curl -s http://localhost:8088/rerank || echo "Service not ready yet"
+ps aux | grep ranker-rs
+sleep 10 && curl -X POST http://localhost:8088/rerank -H "Content-Type: application/json" -d '{"q_tokens":[[0.1,0.2]],"d_tokens":[[[0.3,0.4]]],"topk":1,"prune":{"q_max":16,"d_max":64,"method":"idf_norm"}}' || echo "Service test failed"
+cd ranker-rs && cargo run --release
+cd ranker-rs && cargo run --release
+ls
+cargo run --release
+cd /Users/priyanshigupta/Hackathons/LateInteractionReranker/exa-showdown && curl -X POST http://localhost:8088/rerank -H "Content-Type: application/json" -d '{"q_tokens":[[0.1,0.2,0.3]],"d_tokens":[[[0.4,0.5,0.6],[0.7,0.8,0.9]]],"topk":1,"prune":{"q_max":16,"d_max":64,"method":"idf_norm"}}'
+curl -X POST http://localhost:8088/rerank -H "Content-Type: application/json" -d '{"q_tokens":[[0.1,0.2,0.3]],"d_tokens":[[[0.4,0.5,0.6],[0.7,0.8,0.9]]],"topk":1,"prune":{"q_max":16,"d_max":64,"method":"idf_norm"}}'
+sleep 5 && python orchestrator/run.py --q "Challenges in evaluating LLM-powered search" --providers ddg,baseline --topk 20 --judge heuristic --verbose
+cd orchestrator && python run.py --q "Challenges in evaluating LLM-powered search" --providers ddg,baseline --topk 20 --judge heuristic --verbose
+python run.py --q "Challenges in evaluating LLM-powered search" --providers ddg,baseline --topk 20 --judge heuristic --verbose
+python run.py --q "Challenges in evaluating LLM-powered search" --providers ddg,baseline --topk 20 --judge heuristic --verbose
+sleep 5 && python orchestrator/run.py --q "Challenges in evaluating LLM-powered search" --providers ddg,baseline --topk 20 --judge heuristic --verbose
+cd /Users/priyanshigupta/Hackathons/LateInteractionReranker/exa-showdown && python orchestrator/run.py --q "Challenges in evaluating LLM-powered search" --providers ddg,baseline --topk 20 --judge heuristic --verbose
+chmod +x quick_demo.sh
+chmod +x sigir_demo.sh
+curl -s http://localhost:8088/rerank > /dev/null 2>&1 && echo "âƒ¼ƒ¥ Rust service is running" || echo "âƒ½ƒ¬ Starting Rust service..."
+./sigir_demo.sh
+echo "Testing SIGIR 2025 token pruning performance..."\
+\
+echo ""\
+echo "1. Baseline (no pruning):"\
+curl -s -X POST http://localhost:8088/rerank \\
+  -H "Content-Type: application/json" \\
+  -d '{\
+    "q_tokens": [[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4]],\
+    "d_tokens": [[[0.4,0.5,0.6],[0.7,0.8,0.9],[0.1,0.2,0.3],[0.4,0.5,0.6],[0.7,0.8,0.9]]],\
+    "topk": 5,\
+    "prune": {"q_max": 100, "d_max": 100, "method": "idf_norm"}\
+  }' | jq '.perf'\
+\
+echo ""\
+echo "2. SIGIR 2025 pruning (16 query, 64 doc tokens):"\
+curl -s -X POST http://localhost:8088/rerank \\
+  -H "Content-Type: application/json" \\
+  -d '{\
+    "q_tokens": [[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4]],\
+    "d_tokens": [[[0.4,0.5,0.6],[0.7,0.8,0.9],[0.1,0.2,0.3],[0.4,0.5,0.6],[0.7,0.8,0.9]]],\
+    "topk": 5,\
+    "prune": {"q_max": 16, "d_max": 64, "method": "idf_norm"}\
+  }' | jq '.perf'
+which jq || echo "jq not found, using raw output"\
+\
+echo "Testing SIGIR 2025 token pruning performance..."\
+echo ""\
+\
+echo "1. Baseline (no pruning):"\
+curl -s -X POST http://localhost:8088/rerank \\
+  -H "Content-Type: application/json" \\
+  -d '{\
+    "q_tokens": [[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4]],\
+    "d_tokens": [[[0.4,0.5,0.6],[0.7,0.8,0.9],[0.1,0.2,0.3],[0.4,0.5,0.6],[0.7,0.8,0.9]]],\
+    "topk": 5,\
+    "prune": {"q_max": 100, "d_max": 100, "method": "idf_norm"}\
+  }'\
+\
+echo ""\
+echo "2. SIGIR 2025 pruning (16 query, 64 doc tokens):"\
+curl -s -X POST http://localhost:8088/rerank \\
+  -H "Content-Type: application/json" \\
+  -d '{\
+    "q_tokens": [[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3,0.4]],\
+    "d_tokens": [[[0.4,0.5,0.6],[0.7,0.8,0.9],[0.1,0.2,0.3],[0.4,0.5,0.6],[0.7,0.8,0.9]]],\
+    "topk": 5,\
+    "prune": {"q_max": 16, "d_max": 64, "method": "idf_norm"}\
+  }'
+python orchestrator/run.py --q "What are the latest advances in late-interaction reranking?" --providers ddg,baseline
+pip install matplotlib
+python create_demo_visuals.py
+chmod +x terminal_demo.sh
+chmod +x launch_demo.sh
+./terminal_demo.sh
+chmod +x select_providers.py
+echo "Testing provider selection..." && python select_providers.py --help 2>/dev/null || echo "Provider selection script ready"
+./launch_demo.sh
+curl -s http://localhost:8088/rerank > /dev/null 2>&1 && echo "âƒ¼ƒ¥ Rust service is running" || echo "âƒ½ƒ¬ Rust service not running"
+python orchestrator/run.py --q "What are the latest advances in late-interaction reranking?" --providers ddg,baseline
+open demo_dashboard.html
+open demo_dashboard.html
+pip install flask flask-cors
+sleep 2 && curl -s http://localhost:5000/health
+ps aux | grep backend_server
+python3 backend_server.py
+open http://localhost:5001
+python3 test_real_api.py
+pip install requests
+cd exa-showdown && source .venv/bin/activate && python3 test_real_api.py
+source .venv/bin/activate && python3 test_real_api.py
+source .venv/bin/activate && python3 test_real_api.py
+source .venv/bin/activate && ./terminal_demo.sh
+cd ranker-rs && RUST_LOG=info cargo run --release &
+ls
+cd exa-showdown
+l
+ls
+./launch_demo.sh
+cd ranker-rs && RUST_LOG=info cargo run --release
+cd ranker-rs && RUST_LOG=info cargo run --release &
+cd ranker-rs && cargo run --release &
+cd ranker-rs && cargo run --release
+cargo run --release &
+cd ranker-rs && cargo run --release &
