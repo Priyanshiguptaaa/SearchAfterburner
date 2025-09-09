@@ -16,6 +16,12 @@ from judge import get_judge
 from prompts import get_synthesis_prompt
 from utils import Timer, TimingStats, deduplicate_results, save_trace, set_seed, load_cached_results
 from report import generate_markdown_report, save_markdown_report, print_console_summary, generate_json_report, save_json_report, print_ablation_table, generate_full_report
+from metrics import MetricsCollector, StageTimer
+from cache import CacheManager, CacheConfig
+from filtering import FilterManager, FilterConfig
+from adaptive import AdaptiveOrchestrator, BudgetConfig, TierConfig
+from cascade import CascadeManager, CascadeConfig
+from guardrails import GuardrailManager, GuardrailConfig, EnhancedLogger, LogConfig
 
 # Configure logging
 logging.basicConfig(
@@ -31,13 +37,73 @@ class SearchOrchestrator:
                  embed_model: str = "all-MiniLM-L6-v2",
                  use_local_embed: bool = True,
                  reranker_url: str = "http://localhost:8088",
-                 judge_type: str = "heuristic"):
+                 judge_type: str = "heuristic",
+                 metrics_collector: Optional[MetricsCollector] = None,
+                 enable_caching: bool = True,
+                 enable_filtering: bool = True,
+                 enable_adaptive: bool = True,
+                 enable_cascade: bool = True,
+                 enable_guardrails: bool = True):
         
         self.embedder = get_embedder(use_local_embed, embed_model)
         self.judge = get_judge(judge_type)
         self.reranker_url = reranker_url
+        self.metrics = metrics_collector or MetricsCollector()
         
-        logger.info(f"Initialized orchestrator with embed_model={embed_model}, judge_type={judge_type}")
+        # Initialize caching
+        if enable_caching:
+            cache_config = CacheConfig(
+                memory_size=1000,
+                disk_size_mb=100,
+                ttl_seconds=3600
+            )
+            self.cache = CacheManager(cache_config)
+        else:
+            self.cache = None
+        
+        # Initialize filtering
+        if enable_filtering:
+            filter_config = FilterConfig(
+                enable_dedup=True,
+                enable_quality_filter=True,
+                enable_relevance_filter=True,
+                enable_language_filter=True
+            )
+            self.filter_manager = FilterManager(filter_config)
+        else:
+            self.filter_manager = None
+        
+        # Initialize adaptive system
+        if enable_adaptive:
+            budget_config = BudgetConfig()
+            tier_config = TierConfig()
+            self.adaptive_orchestrator = AdaptiveOrchestrator(budget_config, tier_config)
+        else:
+            self.adaptive_orchestrator = None
+        
+        # Initialize cascade system
+        if enable_cascade:
+            cascade_config = CascadeConfig()
+            self.cascade_manager = CascadeManager(cascade_config)
+        else:
+            self.cascade_manager = None
+        
+        # Initialize guardrails system
+        if enable_guardrails:
+            guardrail_config = GuardrailConfig()
+            self.guardrail_manager = GuardrailManager(guardrail_config)
+            
+            log_config = LogConfig(
+                enable_performance_logging=True,
+                enable_quality_logging=True,
+                enable_audit_logging=True
+            )
+            self.enhanced_logger = EnhancedLogger("orchestrator", log_config)
+        else:
+            self.guardrail_manager = None
+            self.enhanced_logger = None
+        
+        logger.info(f"Initialized orchestrator with embed_model={embed_model}, judge_type={judge_type}, caching={enable_caching}, filtering={enable_filtering}, adaptive={enable_adaptive}, cascade={enable_cascade}, guardrails={enable_guardrails}")
     
     def plan_query(self, query: str) -> List[str]:
         """Plan sub-queries for comprehensive search."""
@@ -51,15 +117,58 @@ class SearchOrchestrator:
         return sub_queries
     
     def search_providers(self, query: str, providers: List[str], max_results: int = 50) -> Dict[str, List[SearchResult]]:
-        """Search using multiple providers."""
+        """Search using multiple providers with caching."""
         logger.info(f"Searching with providers: {providers}")
         
-        with Timer("search_all_providers"):
+        # Check cache first
+        if self.cache:
+            cached_results = self.cache.get_search_results(query, providers)
+            if cached_results:
+                logger.info("Using cached search results")
+                return cached_results
+        
+        with StageTimer(self.metrics, "search", {"providers": providers, "max_results": max_results}):
             results = search_multiple_providers(providers, query, max_results)
         
-        # Deduplicate results
-        for provider in results:
-            results[provider] = deduplicate_results(results[provider], max_results)
+        # Apply filtering and de-duplication
+        if self.filter_manager:
+            # Convert SearchResult objects to dicts for filtering
+            results_dict = {}
+            for provider, provider_results in results.items():
+                results_dict[provider] = [
+                    {
+                        'title': r.title,
+                        'url': r.url,
+                        'snippet': r.snippet,
+                        'provider': r.provider
+                    }
+                    for r in provider_results
+                ]
+            
+            # Apply filtering
+            filtered_results_dict = self.filter_manager.filter_provider_results(results_dict, query)
+            
+            # Convert back to SearchResult objects
+            from providers import SearchResult
+            results = {}
+            for provider, provider_results in filtered_results_dict.items():
+                results[provider] = [
+                    SearchResult(
+                        title=r['title'],
+                        url=r['url'],
+                        snippet=r['snippet'],
+                        provider=r['provider']
+                    )
+                    for r in provider_results
+                ]
+        else:
+            # Fallback to basic deduplication
+            for provider in results:
+                results[provider] = deduplicate_results(results[provider], max_results)
+        
+        # Cache results
+        if self.cache:
+            self.cache.cache_search_results(query, providers, results)
         
         return results
     
@@ -68,8 +177,14 @@ class SearchOrchestrator:
         """Embed texts and rerank using the Rust service."""
         logger.info("Starting embedding and reranking process")
         
-        # Embed query tokens
-        with Timer("embed_query"):
+        # Embed query tokens (with caching)
+        with StageTimer(self.metrics, "embed_query", {"query_length": len(query)}):
+            if self.cache:
+                query_tokens = self.cache.get_embeddings(query)
+                if query_tokens is None:
+                    query_tokens = self.embedder.embed_query_tokens(query)
+                    self.cache.cache_embeddings(query, query_tokens)
+            else:
             query_tokens = self.embedder.embed_query_tokens(query)
         
         reranked_results = {}
@@ -84,7 +199,7 @@ class SearchOrchestrator:
             logger.info(f"Processing {len(provider_results)} results for {provider}")
             
             # Embed document tokens
-            with Timer(f"embed_docs_{provider}"):
+            with StageTimer(self.metrics, "embed_docs", {"provider": provider, "num_docs": len(provider_results)}):
                 doc_tokens_list = []
                 for result in provider_results:
                     # Combine title and snippet for embedding
@@ -108,7 +223,7 @@ class SearchOrchestrator:
             }
             
             # Call reranking service
-            with Timer(f"rerank_{provider}"):
+            with StageTimer(self.metrics, "rerank", {"provider": provider, "num_docs": len(provider_results), "topk": topk}):
                 try:
                     with httpx.Client(timeout=30.0) as client:
                         response = client.post(
@@ -145,19 +260,37 @@ class SearchOrchestrator:
         return reranked_results, rerank_performance
     
     def evaluate_results(self, query: str, results: Dict[str, List[SearchResult]]) -> Dict[str, Any]:
-        """Evaluate search results using the judge."""
+        """Evaluate search results using the cascade system."""
         logger.info("Starting evaluation process")
         
         evaluations = {}
         
-        # Get provider names
+        # Use cascade system if available
+        if self.cascade_manager:
+            for provider, provider_results in results.items():
+                with StageTimer(self.metrics, "judge", {"provider": provider, "num_results": len(provider_results)}):
+                    # Convert SearchResult objects to dicts for cascade
+                    results_dict = [
+                        {
+                            "title": r.title,
+                            "url": r.url,
+                            "snippet": r.snippet,
+                            "provider": r.provider
+                        }
+                        for r in provider_results
+                    ]
+                    
+                    evaluation = self.cascade_manager.evaluate_results(query, results_dict)
+                    evaluations[provider] = evaluation
+        else:
+            # Fallback to original judge system
         providers = list(results.keys())
         
         if len(providers) >= 2:
             # Compare first two providers
             provider1, provider2 = providers[0], providers[1]
             
-            with Timer("evaluate_results"):
+                with StageTimer(self.metrics, "judge", {"provider1": provider1, "provider2": provider2, "num_results": len(results[provider1]) + len(results[provider2])}):
                 evaluation = self.judge.evaluate(
                     query, provider1, results[provider1], 
                     provider2, results[provider2]
@@ -172,6 +305,7 @@ class SearchOrchestrator:
         """Synthesize results into a research brief."""
         logger.info("Synthesizing results")
         
+        with StageTimer(self.metrics, "synthesize", {"num_providers": len(results), "total_results": sum(len(r) for r in results.values())}):
         # For now, return a simple synthesis
         # In a full implementation, this would use LLM synthesis
         synthesis = f"# Research Brief: {query}\n\n"
@@ -190,14 +324,50 @@ class SearchOrchestrator:
                       pairwise_trials: int = 5) -> Dict[str, Any]:
         """Run the complete evaluation pipeline."""
         logger.info(f"Starting evaluation for query: {query}")
-        start_time = time.time()
         
+        # Apply guardrails if enabled
+        if self.guardrail_manager:
+            # Validate input
+            input_violations = self.guardrail_manager.validate_input(query, providers, topk)
+            if not self.guardrail_manager.handle_violations(input_violations):
+                return {"error": "Input validation failed", "violations": [str(v) for v in input_violations]}
+            
+            # Check rate limits
+            if not self.guardrail_manager.check_rate_limit():
+                return {"error": "Rate limit exceeded"}
+            
+            # Check circuit breaker
+            if not self.guardrail_manager.check_circuit_breaker():
+                return {"error": "Circuit breaker is open"}
+            
+            # Log search request
+            if self.enhanced_logger:
+                self.enhanced_logger.log_search_request(query, providers, topk)
+                self.enhanced_logger.log_audit("evaluation_started", "system", {
+                    "query": query[:100],
+                    "providers": providers,
+                    "topk": topk
+                })
+        
+        # Set config flags for metrics
+        self.metrics.set_config_flags({
+            "query": query,
+            "providers": providers,
+            "topk": topk,
+            "protocol": protocol,
+            "attr": attr,
+            "agent_judge": agent_judge,
+            "pairwise_trials": pairwise_trials
+        })
+        
+        with StageTimer(self.metrics, "total", {"query": query, "providers": providers}):
         # Step 1: Plan queries (simplified)
+            with StageTimer(self.metrics, "plan", {"query_length": len(query)}):
         sub_queries = self.plan_query(query)
         logger.info(f"Generated {len(sub_queries)} sub-queries")
         
         # Step 2: Search providers
-        search_start = time.time()
+            with StageTimer(self.metrics, "search_all", {"providers": providers, "sub_queries": len(sub_queries)}):
         all_results = {}
         for sub_query in sub_queries:
             sub_results = self.search_providers(sub_query, providers, max_results=20)
@@ -210,24 +380,11 @@ class SearchOrchestrator:
         for provider in all_results:
             all_results[provider] = deduplicate_results(all_results[provider], 50)
         
-        # Measure individual provider search times (simplified for now)
-        search_time = (time.time() - search_start) * 1000
-        provider_search_times = {}
-        for provider in providers:
-            provider_search_times[provider] = search_time / len(providers)  # Rough estimate
-        
         # Step 3: Embed and rerank
-        embed_start = time.time()
         reranked_results, rerank_performance = self.embed_and_rerank(query, all_results, topk)
-        embed_time = (time.time() - embed_start) * 1000
-        
-        # Calculate total time
-        total_time = (time.time() - start_time) * 1000
         
         # Step 4: Evaluate
-        eval_start = time.time()
         evaluations = self.evaluate_results(query, reranked_results)
-        eval_time = (time.time() - eval_start) * 1000
         
         # Additional evaluations
         pairwise_results = {}
@@ -251,7 +408,7 @@ class SearchOrchestrator:
             if agent_judge == "on":
                 from judge import agent_as_judge_evaluation
                 agent_judge_results[provider] = agent_as_judge_evaluation(
-                    query, provider_results, {"total_time_ms": total_time}
+                        query, provider_results, {"total_time_ms": self.metrics.get_total_duration()}
                 )
         
         # Step 5: Synthesize
@@ -268,11 +425,11 @@ class SearchOrchestrator:
                     "top_results": reranked_results[provider][:topk],
                     "evaluation": evaluations.get(provider, {}),
                     "timing": TimingStats(
-                        search_ms=provider_search_times.get(provider, search_time),
-                        embed_ms=embed_time,
+                        search_ms=0.0,  # Will be filled by metrics
+                        embed_ms=0.0,   # Will be filled by metrics
                         rerank_ms=rerank_p95,  # Use actual p95 from Rust service
-                        judge_ms=eval_time,
-                        total_ms=total_time
+                        judge_ms=0.0,   # Will be filled by metrics
+                        total_ms=self.metrics.get_total_duration()
                     ),
                     "rerank_performance": rerank_performance.get(provider, {}),
                     "pairwise_results": pairwise_results.get(provider, {}),
@@ -280,7 +437,69 @@ class SearchOrchestrator:
                     "agent_judge_results": agent_judge_results.get(provider, {})
                 }
         
-        logger.info(f"Evaluation completed in {total_time:.2f}ms")
+        # Set quality metrics for the metrics collector
+        quality_metrics = {}
+        for provider, data in final_results.items():
+            if "evaluation" in data and isinstance(data["evaluation"], dict):
+                quality_metrics[f"{provider}_rel_at_5"] = data["evaluation"].get("relevance_at_5", 0.0)
+                quality_metrics[f"{provider}_coverage"] = data["evaluation"].get("coverage", 0)
+            else:
+                quality_metrics[f"{provider}_rel_at_5"] = 0.0
+                quality_metrics[f"{provider}_coverage"] = 0
+        
+        self.metrics.set_quality_metrics(quality_metrics)
+        
+        # Save trace
+        trace_file = self.metrics.save_trace()
+        logger.info(f"Trace saved to {trace_file}")
+        
+        # Apply output validation and logging
+        if self.guardrail_manager:
+            total_time = self.metrics.get_total_duration()
+            
+            # Validate output
+            output_violations = self.guardrail_manager.validate_output(final_results, total_time)
+            if not self.guardrail_manager.handle_violations(output_violations):
+                logger.warning("Output validation failed, but continuing")
+            
+            # Record success/failure
+            if output_violations:
+                self.guardrail_manager.record_failure()
+            else:
+                self.guardrail_manager.record_success()
+            
+            # Enhanced logging
+            if self.enhanced_logger:
+                self.enhanced_logger.log_performance("total_evaluation", total_time, {
+                    "query": query,
+                    "providers": providers,
+                    "topk": topk
+                })
+                
+                # Log quality metrics
+                for provider, results in final_results.get("results", {}).items():
+                    if isinstance(results, dict) and "relevance_at_5" in results:
+                        self.enhanced_logger.log_quality("relevance_at_5", results["relevance_at_5"], {
+                            "provider": provider,
+                            "query": query
+                        })
+                    if isinstance(results, dict) and "coverage" in results:
+                        self.enhanced_logger.log_quality("coverage", results["coverage"], {
+                            "provider": provider,
+                            "query": query
+                        })
+                
+                self.enhanced_logger.log_audit("evaluation_completed", "system", {
+                    "query": query[:100],
+                    "providers": providers,
+                    "total_time_ms": total_time,
+                    "success": len(output_violations) == 0
+                })
+        
+        # Print metrics summary
+        self.metrics.print_summary()
+        
+        logger.info(f"Evaluation completed in {self.metrics.get_total_duration():.2f}ms")
         return final_results
 
 def main():
@@ -314,11 +533,13 @@ def main():
     # Parse providers
     providers = [p.strip() for p in args.providers.split(",")]
     
-    # Initialize orchestrator
+    # Initialize orchestrator with metrics
+    metrics_collector = MetricsCollector()
     orchestrator = SearchOrchestrator(
         use_local_embed=(args.embed == "local"),
         reranker_url=args.reranker_url,
-        judge_type=args.judge
+        judge_type=args.judge,
+        metrics_collector=metrics_collector
     )
     
     # Set random seed for reproducibility

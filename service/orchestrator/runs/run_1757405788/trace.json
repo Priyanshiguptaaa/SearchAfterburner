@@ -1,0 +1,710 @@
+{
+  "run_id": "run_1757405788",
+  "timestamp": "2025-09-09T01:18:15.221828",
+  "config_flags": {
+    "query": "Test query for metrics",
+    "providers": [
+      "ddg",
+      "wikipedia"
+    ],
+    "topk": 5,
+    "protocol": "both",
+    "attr": "on",
+    "agent_judge": "on",
+    "pairwise_trials": 5
+  },
+  "quality_metrics": {
+    "ddg_rel_at_5": 0.0,
+    "ddg_coverage": 0,
+    "wikipedia_rel_at_5": 0.0,
+    "wikipedia_coverage": 0
+  },
+  "total_duration_ms": 106325.56796073914,
+  "stage_stats": {
+    "total": {
+      "count": 4,
+      "p50_ms": 0.0,
+      "p90_ms": 159488.3519411087,
+      "p95_ms": 186069.7439312935,
+      "p99_ms": 207334.85752344131,
+      "min_ms": 0.0,
+      "max_ms": 106325.56796073914,
+      "mean_ms": 26581.391990184784,
+      "std_ms": 53162.78398036957
+    },
+    "plan": {
+      "count": 4,
+      "p50_ms": 0.0,
+      "p90_ms": 120443.3022737503,
+      "p95_ms": 140517.18598604202,
+      "p99_ms": 156576.2929558754,
+      "min_ms": 0.0,
+      "max_ms": 80295.53484916687,
+      "mean_ms": 20073.883712291718,
+      "std_ms": 40147.767424583435
+    },
+    "search_all": {
+      "count": 4,
+      "p50_ms": 0.0,
+      "p90_ms": 159164.37327861786,
+      "p95_ms": 185691.76882505417,
+      "p99_ms": 206913.68526220322,
+      "min_ms": 0.0,
+      "max_ms": 106109.58218574524,
+      "mean_ms": 26527.39554643631,
+      "std_ms": 53054.79109287262
+    },
+    "search": {
+      "count": 12,
+      "p50_ms": 0.0,
+      "p90_ms": 74275.66311359406,
+      "p95_ms": 143245.92171907425,
+      "p99_ms": 198422.1286034584,
+      "min_ms": 0.0,
+      "max_ms": 106108.09016227722,
+      "mean_ms": 8842.340846856436,
+      "std_ms": 30630.767209193917
+    },
+    "embed_query": {
+      "count": 4,
+      "p50_ms": 0.0,
+      "p90_ms": 119537.54818439484,
+      "p95_ms": 139460.47288179398,
+      "p99_ms": 155398.8126397133,
+      "min_ms": 0.0,
+      "max_ms": 79691.69878959656,
+      "mean_ms": 19922.92469739914,
+      "std_ms": 39845.84939479828
+    },
+    "embed_docs": {
+      "count": 8,
+      "p50_ms": 0.0,
+      "p90_ms": 87743.14658641815,
+      "p95_ms": 123638.07018995285,
+      "p99_ms": 152354.0090727806,
+      "min_ms": 0.0,
+      "max_ms": 79766.49689674377,
+      "mean_ms": 9970.812112092972,
+      "std_ms": 28201.71543359161
+    },
+    "rerank": {
+      "count": 8,
+      "p50_ms": 0.0,
+      "p90_ms": 87883.09767246246,
+      "p95_ms": 123835.27399301529,
+      "p99_ms": 152597.01504945755,
+      "min_ms": 0.0,
+      "max_ms": 79893.72515678406,
+      "mean_ms": 9986.715644598007,
+      "std_ms": 28246.697416308136
+    },
+    "judge": {
+      "count": 4,
+      "p50_ms": 0.0,
+      "p90_ms": 119515.75148105621,
+      "p95_ms": 139435.04339456558,
+      "p99_ms": 155370.47692537308,
+      "min_ms": 0.0,
+      "max_ms": 79677.16765403748,
+      "mean_ms": 19919.29191350937,
+      "std_ms": 39838.58382701874
+    },
+    "synthesize": {
+      "count": 4,
+      "p50_ms": 0.0,
+      "p90_ms": 119514.6689414978,
+      "p95_ms": 139433.78043174744,
+      "p99_ms": 155369.06962394714,
+      "min_ms": 0.0,
+      "max_ms": 79676.44596099854,
+      "mean_ms": 19919.111490249634,
+      "std_ms": 39838.22298049927
+    }
+  },
+  "stage_timings": [
+    {
+      "start_time": 1757405788.894559,
+      "end_time": 1757405895.2201269,
+      "duration_ms": 106325.56796073914,
+      "stage_name": "total",
+      "metadata": {
+        "query": "Test query for metrics",
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ]
+      }
+    },
+    {
+      "start_time": 1757405788.894573,
+      "end_time": 1757405869.1901078,
+      "duration_ms": 80295.53484916687,
+      "stage_name": "plan",
+      "metadata": {
+        "query_length": 22
+      }
+    },
+    {
+      "start_time": 1757405788.894631,
+      "end_time": 1757405895.004213,
+      "duration_ms": 106109.58218574524,
+      "stage_name": "search_all",
+      "metadata": {
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ],
+        "sub_queries": 3
+      }
+    },
+    {
+      "start_time": 1757405788.894683,
+      "end_time": 1757405895.002773,
+      "duration_ms": 106108.09016227722,
+      "stage_name": "search",
+      "metadata": {
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ],
+        "max_results": 20
+      }
+    },
+    {
+      "start_time": 1757405798.295137,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "search",
+      "metadata": {
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ],
+        "max_results": 20
+      }
+    },
+    {
+      "start_time": 1757405806.40146,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "search",
+      "metadata": {
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ],
+        "max_results": 20
+      }
+    },
+    {
+      "start_time": 1757405815.3135092,
+      "end_time": 1757405895.005208,
+      "duration_ms": 79691.69878959656,
+      "stage_name": "embed_query",
+      "metadata": {
+        "query_length": 22
+      }
+    },
+    {
+      "start_time": 1757405815.315017,
+      "end_time": 1757405895.081514,
+      "duration_ms": 79766.49689674377,
+      "stage_name": "embed_docs",
+      "metadata": {
+        "provider": "wikipedia",
+        "num_docs": 46
+      }
+    },
+    {
+      "start_time": 1757405815.3228219,
+      "end_time": 1757405895.216547,
+      "duration_ms": 79893.72515678406,
+      "stage_name": "rerank",
+      "metadata": {
+        "provider": "wikipedia",
+        "num_docs": 46,
+        "topk": 5
+      }
+    },
+    {
+      "start_time": 1757405815.36416,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "embed_docs",
+      "metadata": {
+        "provider": "wikipedia",
+        "num_docs": 45
+      }
+    },
+    {
+      "start_time": 1757405815.400002,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "rerank",
+      "metadata": {
+        "provider": "wikipedia",
+        "num_docs": 45,
+        "topk": 5
+      }
+    },
+    {
+      "start_time": 1757405815.5408902,
+      "end_time": 1757405895.2180579,
+      "duration_ms": 79677.16765403748,
+      "stage_name": "judge",
+      "metadata": {
+        "provider1": "ddg",
+        "provider2": "wikipedia",
+        "num_results": 10
+      }
+    },
+    {
+      "start_time": 1757405815.543666,
+      "end_time": 1757405895.2201118,
+      "duration_ms": 79676.44596099854,
+      "stage_name": "synthesize",
+      "metadata": {
+        "num_providers": 2,
+        "total_results": 10
+      }
+    },
+    {
+      "start_time": 1757405815.549352,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "total",
+      "metadata": {
+        "query": "Test query for metrics",
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ]
+      }
+    },
+    {
+      "start_time": 1757405815.549363,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "plan",
+      "metadata": {
+        "query_length": 22
+      }
+    },
+    {
+      "start_time": 1757405815.5495229,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "search_all",
+      "metadata": {
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ],
+        "sub_queries": 3
+      }
+    },
+    {
+      "start_time": 1757405815.549751,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "search",
+      "metadata": {
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ],
+        "max_results": 20
+      }
+    },
+    {
+      "start_time": 1757405824.549767,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "search",
+      "metadata": {
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ],
+        "max_results": 20
+      }
+    },
+    {
+      "start_time": 1757405834.003076,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "search",
+      "metadata": {
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ],
+        "max_results": 20
+      }
+    },
+    {
+      "start_time": 1757405843.22592,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "embed_query",
+      "metadata": {
+        "query_length": 22
+      }
+    },
+    {
+      "start_time": 1757405843.226702,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "embed_docs",
+      "metadata": {
+        "provider": "ddg",
+        "num_docs": 22
+      }
+    },
+    {
+      "start_time": 1757405843.2363951,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "rerank",
+      "metadata": {
+        "provider": "ddg",
+        "num_docs": 22,
+        "topk": 5
+      }
+    },
+    {
+      "start_time": 1757405843.290564,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "embed_docs",
+      "metadata": {
+        "provider": "wikipedia",
+        "num_docs": 45
+      }
+    },
+    {
+      "start_time": 1757405843.3242528,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "rerank",
+      "metadata": {
+        "provider": "wikipedia",
+        "num_docs": 45,
+        "topk": 5
+      }
+    },
+    {
+      "start_time": 1757405843.44993,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "judge",
+      "metadata": {
+        "provider1": "ddg",
+        "provider2": "wikipedia",
+        "num_results": 10
+      }
+    },
+    {
+      "start_time": 1757405843.4518871,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "synthesize",
+      "metadata": {
+        "num_providers": 2,
+        "total_results": 10
+      }
+    },
+    {
+      "start_time": 1757405843.4611552,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "total",
+      "metadata": {
+        "query": "Test query for metrics",
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ]
+      }
+    },
+    {
+      "start_time": 1757405843.461165,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "plan",
+      "metadata": {
+        "query_length": 22
+      }
+    },
+    {
+      "start_time": 1757405843.4612212,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "search_all",
+      "metadata": {
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ],
+        "sub_queries": 3
+      }
+    },
+    {
+      "start_time": 1757405843.461271,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "search",
+      "metadata": {
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ],
+        "max_results": 20
+      }
+    },
+    {
+      "start_time": 1757405852.094183,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "search",
+      "metadata": {
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ],
+        "max_results": 20
+      }
+    },
+    {
+      "start_time": 1757405860.401624,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "search",
+      "metadata": {
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ],
+        "max_results": 20
+      }
+    },
+    {
+      "start_time": 1757405868.795871,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "embed_query",
+      "metadata": {
+        "query_length": 22
+      }
+    },
+    {
+      "start_time": 1757405868.796512,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "embed_docs",
+      "metadata": {
+        "provider": "ddg",
+        "num_docs": 22
+      }
+    },
+    {
+      "start_time": 1757405868.807243,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "rerank",
+      "metadata": {
+        "provider": "ddg",
+        "num_docs": 22,
+        "topk": 5
+      }
+    },
+    {
+      "start_time": 1757405868.8551528,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "embed_docs",
+      "metadata": {
+        "provider": "wikipedia",
+        "num_docs": 45
+      }
+    },
+    {
+      "start_time": 1757405869.006473,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "rerank",
+      "metadata": {
+        "provider": "wikipedia",
+        "num_docs": 45,
+        "topk": 5
+      }
+    },
+    {
+      "start_time": 1757405869.170594,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "judge",
+      "metadata": {
+        "provider1": "ddg",
+        "provider2": "wikipedia",
+        "num_results": 10
+      }
+    },
+    {
+      "start_time": 1757405869.174835,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "synthesize",
+      "metadata": {
+        "num_providers": 2,
+        "total_results": 10
+      }
+    },
+    {
+      "start_time": 1757405869.189847,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "total",
+      "metadata": {
+        "query": "Test query for metrics",
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ]
+      }
+    },
+    {
+      "start_time": 1757405869.189873,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "plan",
+      "metadata": {
+        "query_length": 22
+      }
+    },
+    {
+      "start_time": 1757405869.190128,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "search_all",
+      "metadata": {
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ],
+        "sub_queries": 3
+      }
+    },
+    {
+      "start_time": 1757405869.190391,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "search",
+      "metadata": {
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ],
+        "max_results": 20
+      }
+    },
+    {
+      "start_time": 1757405877.5708852,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "search",
+      "metadata": {
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ],
+        "max_results": 20
+      }
+    },
+    {
+      "start_time": 1757405886.616979,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "search",
+      "metadata": {
+        "providers": [
+          "ddg",
+          "wikipedia"
+        ],
+        "max_results": 20
+      }
+    },
+    {
+      "start_time": 1757405895.004417,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "embed_query",
+      "metadata": {
+        "query_length": 22
+      }
+    },
+    {
+      "start_time": 1757405895.005308,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "embed_docs",
+      "metadata": {
+        "provider": "ddg",
+        "num_docs": 22
+      }
+    },
+    {
+      "start_time": 1757405895.01427,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "rerank",
+      "metadata": {
+        "provider": "ddg",
+        "num_docs": 22,
+        "topk": 5
+      }
+    },
+    {
+      "start_time": 1757405895.060589,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "embed_docs",
+      "metadata": {
+        "provider": "wikipedia",
+        "num_docs": 46
+      }
+    },
+    {
+      "start_time": 1757405895.085969,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "rerank",
+      "metadata": {
+        "provider": "wikipedia",
+        "num_docs": 46,
+        "topk": 5
+      }
+    },
+    {
+      "start_time": 1757405895.217958,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "judge",
+      "metadata": {
+        "provider1": "ddg",
+        "provider2": "wikipedia",
+        "num_results": 10
+      }
+    },
+    {
+      "start_time": 1757405895.2200499,
+      "end_time": 0.0,
+      "duration_ms": 0.0,
+      "stage_name": "synthesize",
+      "metadata": {
+        "num_providers": 2,
+        "total_results": 10
+      }
+    }
+  ]
+}

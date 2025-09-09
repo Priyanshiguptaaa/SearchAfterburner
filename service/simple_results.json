@@ -1,0 +1,28 @@
+{
+  "query": "python programming",
+  "providers": [
+    "ddg",
+    "wikipedia"
+  ],
+  "total_time_ms": 1153.2118320465088,
+  "timing": {
+    "search_ms": 1152.9128551483154,
+    "rerank_ms": 0.2911090850830078,
+    "eval_ms": 0.007867813110351562
+  },
+  "results": {
+    "ddg": {
+      "num_results": 3,
+      "provider": "ddg"
+    },
+    "wikipedia": {
+      "num_results": 0,
+      "provider": "wikipedia"
+    }
+  },
+  "rerank_performance": {
+    "total_ms": 0,
+    "p50_ms": 0,
+    "p95_ms": 0
+  }
+}

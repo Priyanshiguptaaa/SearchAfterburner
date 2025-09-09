@@ -1,0 +1,383 @@
+{
+  "query": "Test query for metrics",
+  "providers": [
+    "ddg",
+    "wikipedia"
+  ],
+  "topk": 5,
+  "results": {
+    "query": "Test query for metrics",
+    "providers": [
+      "ddg",
+      "wikipedia"
+    ],
+    "ablation_results": [
+      {
+        "ddg": {
+          "top_results": [
+            "SearchResult(title='20 Best Practices for Monitoring and Visualizing Loki Logs in \u2026', url='https://techbloomeracademy.com/docs/Loki/10+-+Best+Practices/Best+Practices/', snippet='20. Test Queries with Real Data Test LogQL queries with real data from your system to validate accuracy and efficiency.', provider='ddg')",
+            "SearchResult(title='Amazon Route 53 monitoring: Best practices, key metrics, and', url='https://www.site24x7.com/learn/aws/amazon-route53-monitoring-best-practices-and-key-metrics.html', snippet='This article explores the importance of Route 53 monitoring, key metrics to track, and best practices to enhance your DNS strategy.', provider='ddg')",
+            "SearchResult(title='SharePoint Performance Metrics: Best Practices for Optimization', url='https://fastsharepoint.com/governance/sharepoint-performance-metrics-best-practices-for-optimization/', snippet='SharePoint Performance Metrics: Best Practices for Optimization SharePoint Performance Metrics: Best Practices for Optimization As organizations continue to rely on SharePoint as a \u2026', provider='ddg')",
+            "SearchResult(title='SQL Queries Test Guide 2025 - Master Interview Questions', url='https://www.devzery.com/post/sql-queries-test-complete-guide', snippet='Jun 10, 2025 \u00b7 Master SQL queries test with our comprehensive guide. Learn testing strategies, practice questions, and expert tips for database interviews and assessments.', provider='ddg')",
+            "SearchResult(title='Settings - Speedtest by Ookla', url='https://www.speedtest.net/zh-Hant/settings', snippet=\"Create an Account Join the millions of other people helping us to accelerate the Internet! By creating an account, you'll be able to access your historical results anywhere and manage \u2026\", provider='ddg')"
+          ],
+          "evaluation": 0.7346666666666667,
+          "timing": "TimingStats(search_ms=0.0, embed_ms=0.0, rerank_ms=0.0, judge_ms=0.0, total_ms=26649.1641998291)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 17.640999,
+            "per_doc_p95_us": 32.185998,
+            "docs_scored": 16
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 0.7142857142857143,
+            "attr_recall": 1.0,
+            "supported_sentences": 5,
+            "total_sentences": 7,
+            "claim_precision": 0.6666666666666666,
+            "claim_recall": 0.4,
+            "supported_claims": 2,
+            "total_claims": 3
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 0.4,
+              "redundancy": 0.07398489903049013,
+              "budget": 0.06379802967331948
+            },
+            "raw_response": "Breadth: 2 topics, Redundancy: 0.07, Budget: 0.06"
+          }
+        },
+        "wikipedia": {
+          "top_results": [
+            "SearchResult(title='PostgreSQL', url='https://en.wikipedia.org/wiki/PostgreSQL', snippet='<p class=\"mw-empty-elt\">\\n</p>\\n\\n\\n<p><b>PostgreSQL</b> (<span> <span></span></span> <i title=\"English pronunciation respelling\"><span>POHST</span>-gres-kew-<span>EL</span></i>) also known as <b>Postgres</b>, is a free and open-source relational database management system (RDBMS) emphasizing extensibility and SQL compliance. PostgreSQL features transactions with atomicity, consistency, isolation, durability (ACID) properties, automatically updatable views, materialized views, triggers, foreign keys', provider='wikipedia')",
+            "SearchResult(title='Visual Studio', url='https://en.wikipedia.org/wiki/Visual_Studio', snippet='<p class=\"mw-empty-elt\">\\n</p>\\n\\n<p><b>Visual Studio</b> is an integrated development environment (IDE) developed by Microsoft. It is used to develop computer programs including websites, web apps, web services and mobile apps. Visual Studio uses Microsoft software development platforms including Windows API, Windows Forms, Windows Presentation Foundation (WPF), Microsoft Store and Microsoft Silverlight. It can produce both native code and managed code.\\n</p><p>Visual Studio includes a code editor ', provider='wikipedia')",
+            "SearchResult(title='Bibliometrics', url='https://en.wikipedia.org/wiki/Bibliometrics', snippet='<p class=\"mw-empty-elt\">\\n</p>\\n\\n\\n\\n<p><b>Bibliometrics</b>  is the application of statistical methods to the study of bibliographic data, especially in scientific and library and information science contexts, and is closely associated with scientometrics (the analysis of scientific metrics and indicators) to the point that both fields largely overlap.\\n</p><p>Bibliometrics studies first appeared in the late 19th century. They have known a significant development after the Second World War in a cont', provider='wikipedia')",
+            "SearchResult(title='Business analytics', url='https://en.wikipedia.org/wiki/Business_analytics', snippet='<p><b>Business analytics</b> (<b>BA</b>) refers to the skills, technologies, and practices for iterative exploration and investigation of past business performance to gain insight and drive business planning. Business analytics focuses on developing new insights and understanding of business performance based on data and statistical methods. In contrast, business intelligence traditionally focuses on using a consistent set metrics to both measure past performance and guide business planning. In ', provider='wikipedia')",
+            "SearchResult(title='F-score', url='https://en.wikipedia.org/wiki/F-score', snippet='<p>In statistical analysis of binary classification and information retrieval systems, the <b>F-score</b> or <b>F-measure</b> is a measure of predictive performance. It is calculated from the precision and recall of the test, where the precision is the number of true positive results divided by the number of all samples predicted to be positive, including those not identified correctly, and the recall is the number of true positive results divided by the number of all samples that should have be', provider='wikipedia')"
+          ],
+          "evaluation": 0.6813333333333333,
+          "timing": "TimingStats(search_ms=0.0, embed_ms=0.0, rerank_ms=0.0, judge_ms=0.0, total_ms=26649.1641998291)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 35.638000000000005,
+            "per_doc_p95_us": 1876.432,
+            "docs_scored": 45
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 0.2,
+            "attr_recall": 0.6,
+            "supported_sentences": 3,
+            "total_sentences": 15,
+            "claim_precision": 0.14285714285714285,
+            "claim_recall": 0.4,
+            "supported_claims": 2,
+            "total_claims": 14
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 0.6,
+              "redundancy": 0.07194733114987344,
+              "budget": 0.020640539011956303
+            },
+            "raw_response": "Breadth: 3 topics, Redundancy: 0.07, Budget: 0.02"
+          }
+        },
+        "ablation_config": {
+          "late": "off",
+          "prune": "none",
+          "name": "Single-vector baseline"
+        }
+      },
+      {
+        "ddg": {
+          "top_results": [
+            "SearchResult(title='Test Metrics and Problem-Solving | SpringerLink', url='https://link.springer.com/chapter/10.1007/978-3-030-28494-7_9', snippet='Oct 1, 2019 \u00b7 This chapter presents a collection of test and other metrics to provide visibility into key areas of the organization and to show how metrics are used to facilitate improvement.', provider='ddg')",
+            "SearchResult(title='QA Metrics That Actually Matter: A Practical Guide', url='https://bugbug.io/blog/software-testing/qa-metrics/', snippet='Apr 16, 2025 \u00b7 QA metrics are essential for tracking software quality and testing efficiency, helping teams measure everything from test execution and defect rates to customer satisfaction and \u2026', provider='ddg')",
+            "SearchResult(title='How to Determine the Right Testing Metrics: The Ultimate Guide for \u2026', url='https://www.bomberbot.com/browsers/how-to-determine-the-right-testing-metrics-the-ultimate-guide-for-qa-managers/', snippet='Jan 8, 2025 \u00b7 This comprehensive guide provides research-backed best practices, sample metrics tailored to project life cycles, and expert advice for leveraging testing KPIs to maximize software \u2026', provider='ddg')",
+            "SearchResult(title='Test Metrics With Example | TestKarts', url='https://www.testkarts.com/manual-testing/test-metrics', snippet='In this tutorial, we will explore the concept of test metrics, Learn and understand when and why to use test metrics, discuss their objectives and requirements, explore different types of test \u2026', provider='ddg')",
+            "SearchResult(title='Test Reporting Essentials: Metrics, Practices & Tools for QA Success', url='https://www.testrail.com/blog/test-reporting-success/', snippet='Feb 20, 2025 \u00b7 To maximize their impact, focus on the right metrics and tailored best practices. A well-crafted report supports collaboration, informs decisions, and drives quality improvements.', provider='ddg')"
+          ],
+          "evaluation": 0.8016666666666665,
+          "timing": "TimingStats(search_ms=0.0, embed_ms=0.0, rerank_ms=0.0, judge_ms=0.0, total_ms=54557.363986968994)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 15.188,
+            "per_doc_p95_us": 49.43,
+            "docs_scored": 22
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 0.8333333333333334,
+            "attr_recall": 1.0,
+            "supported_sentences": 5,
+            "total_sentences": 6,
+            "claim_precision": 0.8,
+            "claim_recall": 0.8,
+            "supported_claims": 4,
+            "total_claims": 5
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 0.6,
+              "redundancy": 0.13316190628387883,
+              "budget": 0.06965386276011688
+            },
+            "raw_response": "Breadth: 3 topics, Redundancy: 0.13, Budget: 0.07"
+          }
+        },
+        "wikipedia": {
+          "top_results": [
+            "SearchResult(title='Google PageSpeed Tools', url='https://en.wikipedia.org/wiki/Google_PageSpeed_Tools', snippet='<p><b>Google PageSpeed</b> is a family of tools by Google, Inc. designed to help optimize website performance. It was introduced at a Developer Conference in 2010.\\nThere are four main components of PageSpeed family tools:\\n</p>\\n<ul><li>PageSpeed Module (consisting of mod PageSpeed for the Apache HTTP Server and NGX PageSpeed for the Nginx)</li>\\n<li>PageSpeed Insights</li>\\n<li>PageSpeed Service</li>\\n<li>PageSpeed Chrome DevTools extension. These components aim to identify and automatically correct', provider='wikipedia')",
+            "SearchResult(title='NDepend', url='https://en.wikipedia.org/wiki/NDepend', snippet='<p><b>NDepend</b> is a static analysis tool for C# and .NET code to manage code quality and security. The tool proposes a large number of features, from CI/CD Web Reporting to Quality Gate and Dependencies Visualization. For that reason, the community refers to it as the \"Swiss Army Knife\" for .NET Developers.\\n</p>', provider='wikipedia')",
+            "SearchResult(title='Visual Studio', url='https://en.wikipedia.org/wiki/Visual_Studio', snippet='<p class=\"mw-empty-elt\">\\n</p>\\n\\n<p><b>Visual Studio</b> is an integrated development environment (IDE) developed by Microsoft. It is used to develop computer programs including websites, web apps, web services and mobile apps. Visual Studio uses Microsoft software development platforms including Windows API, Windows Forms, Windows Presentation Foundation (WPF), Microsoft Store and Microsoft Silverlight. It can produce both native code and managed code.\\n</p><p>Visual Studio includes a code editor ', provider='wikipedia')",
+            "SearchResult(title='Cppdepend', url='https://en.wikipedia.org/wiki/Cppdepend', snippet='<p><b>CppDepend</b> is a static analysis tool for C/C++ code. This tool supports a large number of code metrics, allows for visualization of dependencies using directed graphs and dependency matrix. The tools also performs code base snapshots comparison, and validation of architectural and quality rules. User-defined rules can be written using LINQ queries. This possibility is named CQLinq. The tool also comes with a large number of predefined CQLinq code rules.\\n</p>', provider='wikipedia')",
+            "SearchResult(title='Grafana', url='https://en.wikipedia.org/wiki/Grafana', snippet='<p><b>Grafana</b> is a multi-platform open source analytics and interactive visualization web application. It can produce charts, graphs, and alerts for the web when connected to supported data sources.\\n</p><p>There is also a licensed <b>Grafana Enterprise</b> version with additional capabilities, which is sold as a self-hosted installation or through an account on the Grafana Labs cloud service. It is expandable through a plug-in system. Complex monitoring dashboards can be built by end users, ', provider='wikipedia')"
+          ],
+          "evaluation": 0.6773333333333333,
+          "timing": "TimingStats(search_ms=0.0, embed_ms=0.0, rerank_ms=0.0, judge_ms=0.0, total_ms=54557.363986968994)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 45.983000000000004,
+            "per_doc_p95_us": 2528.8909999999996,
+            "docs_scored": 45
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 0.23076923076923078,
+            "attr_recall": 1.2,
+            "supported_sentences": 6,
+            "total_sentences": 26,
+            "claim_precision": 0.2857142857142857,
+            "claim_recall": 1.2,
+            "supported_claims": 6,
+            "total_claims": 21
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 0.6,
+              "redundancy": 0.0980528907437275,
+              "budget": 0.012830974718968899
+            },
+            "raw_response": "Breadth: 3 topics, Redundancy: 0.10, Budget: 0.01"
+          }
+        },
+        "ablation_config": {
+          "late": "on",
+          "prune": "none",
+          "name": "Late-interaction, no pruning"
+        }
+      },
+      {
+        "ddg": {
+          "top_results": [
+            "SearchResult(title='Speedtest por Ookla - La prueba de velocidad de banda ancha global', url='https://www.speedtest.net/es', snippet='Mide la velocidad de tu conexi\u00f3n a Internet con Speedtest, disponible para dispositivos m\u00f3viles y de escritorio.', provider='ddg')",
+            "SearchResult(title='64 Test Metrics For Measuring Progress, Quality, Productivity', url='https://medium.com/qasymphony/64-test-metrics-for-measuring-progress-quality-productivity-more-4ef220f78b1b', snippet='Feb 15, 2017 \u00b7 64 Test Metrics For Measuring Progress, Quality, Productivity & More! Software testing metrics are a way to measure and monitor your test activities. More importantly, they \u2026', provider='ddg')",
+            "SearchResult(title='The five biggest challenges of test data management', url='https://www.datprof.com/blogs/the-five-biggest-challenges-of-test-data-management/', snippet='Jan 13, 2025 \u00b7 These are the most important and impactful challenges in test data management. Read on to discover how you can start addressing one of these challenges today and gain \u2026', provider='ddg')",
+            "SearchResult(title='Test Metrics Tutorial: Definition, Types, and Best Practices', url='https://zetcode.com/terms-testing/test-metrics/', snippet='Apr 4, 2025 \u00b7 Learn test metrics in software testing: its definition, types (process, product, project), benefits, and best practices. A comprehensive guide by ZetCode to enhance your QA \u2026', provider='ddg')",
+            "SearchResult(title='Top Software Testing Metrics: Types, Examples & How to Measure', url='https://www.accelq.com/blog/software-testing-metrics/', snippet='Mar 9, 2025 \u00b7 Software Testing is mighty important in lifecycle development, and Software Testing Metrics provide important information about testing progress, challenges, and quality. This \u2026', provider='ddg')"
+          ],
+          "evaluation": 0.7876666666666667,
+          "timing": "TimingStats(search_ms=0.0, embed_ms=0.0, rerank_ms=0.0, judge_ms=0.0, total_ms=80280.3680896759)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 15.0460005,
+            "per_doc_p95_us": 29.906,
+            "docs_scored": 22
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 0.5555555555555556,
+            "attr_recall": 1.0,
+            "supported_sentences": 5,
+            "total_sentences": 9,
+            "claim_precision": 0.6666666666666666,
+            "claim_recall": 0.8,
+            "supported_claims": 4,
+            "total_claims": 6
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 0.6,
+              "redundancy": 0.09488890025563698,
+              "budget": 0.036125150099951
+            },
+            "raw_response": "Breadth: 3 topics, Redundancy: 0.09, Budget: 0.04"
+          }
+        },
+        "wikipedia": {
+          "top_results": [
+            "SearchResult(title='Distance matrix', url='https://en.wikipedia.org/wiki/Distance_matrix', snippet='<p>In mathematics, computer science and especially graph theory, a <b>distance matrix</b> is a square matrix (two-dimensional array) containing the distances, taken pairwise, between the elements of a set. Depending upon the application involved, the <i>distance</i> being used to define this matrix may or may not be a metric. If there are <span>N</span> elements, this matrix will have size <span><i>N</i>\u00d7<i>N</i></span>. In graph-theoretic applications, the elements are more often referred to as', provider='wikipedia')",
+            "SearchResult(title='PageRank', url='https://en.wikipedia.org/wiki/PageRank', snippet='<p><b>PageRank</b> (<b>PR</b>) is an algorithm used by Google Search to rank web pages in their search engine results. It is named after both the term \"web page\" and co-founder Larry Page. PageRank is a way of measuring the importance of website pages. According to Google: </p><blockquote class=\"templatequote\"><p>PageRank works by counting the number and quality of links to a page to determine a rough estimate of how important the website is. The underlying assumption is that more important webs', provider='wikipedia')",
+            "SearchResult(title='Cppdepend', url='https://en.wikipedia.org/wiki/Cppdepend', snippet='<p><b>CppDepend</b> is a static analysis tool for C/C++ code. This tool supports a large number of code metrics, allows for visualization of dependencies using directed graphs and dependency matrix. The tools also performs code base snapshots comparison, and validation of architectural and quality rules. User-defined rules can be written using LINQ queries. This possibility is named CQLinq. The tool also comes with a large number of predefined CQLinq code rules.\\n</p>', provider='wikipedia')",
+            "SearchResult(title='Network Time Protocol', url='https://en.wikipedia.org/wiki/Network_Time_Protocol', snippet='<p class=\"mw-empty-elt\">\\n</p>\\n\\n\\n<p>The <b>Network Time Protocol</b> (<b>NTP</b>) is a networking protocol for clock synchronization between computer systems over packet-switched, variable-latency data networks. In operation since before 1985, NTP is one of the oldest Internet protocols in current use. NTP was designed by David L. Mills of the University of Delaware.\\n</p><p>NTP is intended to synchronize participating computers to within a few milliseconds of Coordinated Universal Time (UTC). It ', provider='wikipedia')",
+            "SearchResult(title='Binary classification', url='https://en.wikipedia.org/wiki/Binary_classification', snippet='<p><b>Binary classification</b> is the task of classifying the elements of a set into one of two groups (each called <i>class</i>). Typical binary classification problems include:\\n</p>\\n<ul><li>Medical testing to determine if a patient has a certain disease or not;</li>\\n<li>Quality control in industry, deciding whether a specification has been met;</li>\\n<li>In information retrieval, deciding whether a page should be in the result set of a search or not</li>\\n<li>In administration, deciding whether', provider='wikipedia')"
+          ],
+          "evaluation": 0.6986666666666667,
+          "timing": "TimingStats(search_ms=0.0, embed_ms=0.0, rerank_ms=0.0, judge_ms=0.0, total_ms=80280.3680896759)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 39.442997,
+            "per_doc_p95_us": 2021.5451999999998,
+            "docs_scored": 45
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 0.13636363636363635,
+            "attr_recall": 0.6,
+            "supported_sentences": 3,
+            "total_sentences": 22,
+            "claim_precision": 0.14285714285714285,
+            "claim_recall": 0.6,
+            "supported_claims": 3,
+            "total_claims": 21
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 0.8,
+              "redundancy": 0.07623403421833301,
+              "budget": 0.004982779324131172
+            },
+            "raw_response": "Breadth: 4 topics, Redundancy: 0.08, Budget: 0.00"
+          }
+        },
+        "ablation_config": {
+          "late": "on",
+          "prune": "16/64",
+          "name": "Late-interaction, 16/64 pruning"
+        }
+      },
+      {
+        "ddg": {
+          "top_results": [
+            "SearchResult(title='Speedtest Apps: Our internet speed test available across a variety \u2026', url='https://www.speedtest.net/apps', snippet='Quickly and easily test your internet connection with free apps from Speedtest\u2014any time, on any device.', provider='ddg')",
+            "SearchResult(title='Speedtest by Ookla - The Global Broadband Speed Test', url='https://www.speedtest.net/', snippet='Test your internet speed on any device with Speedtest by Ookla, available for free on desktop and mobile apps.', provider='ddg')",
+            "SearchResult(title='Test Metrics and Problem-Solving | SpringerLink', url='https://link.springer.com/chapter/10.1007/978-3-030-28494-7_9', snippet='Oct 1, 2019 \u00b7 This chapter presents a collection of test and other metrics to provide visibility into key areas of the organization and to show how metrics are used to facilitate improvement.', provider='ddg')",
+            "SearchResult(title='Software Testing Metrics: What is, Types & Example - Guru99', url='https://www.guru99.com/software-testing-metrics-complete-tutorial.html', snippet='Apr 4, 2024 \u00b7 Software Testing Metrics are the quantitative measures used to estimate the progress, quality, productivity and health of the software testing process.', provider='ddg')",
+            "SearchResult(title='Test Reporting Essentials: Metrics, Practices & Tools for QA \u2026', url='https://www.testrail.com/blog/test-reporting-success/', snippet='Feb 20, 2025 \u00b7 The report highlights identified issues, blockers, delays, or even skipped tests due to last-minute changes during the test execution period. It also offers insights into overall quality and discusses any challenges encountered, along with suggestions for improvement. Why do you need a test report?', provider='ddg')"
+          ],
+          "evaluation": 0.7523333333333333,
+          "timing": "TimingStats(search_ms=0.0, embed_ms=0.0, rerank_ms=0.0, judge_ms=0.0, total_ms=106325.56796073914)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 22.511,
+            "per_doc_p95_us": 49.443997,
+            "docs_scored": 22
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 1.0,
+            "attr_recall": 1.4,
+            "supported_sentences": 7,
+            "total_sentences": 7,
+            "claim_precision": 1.0,
+            "claim_recall": 0.8,
+            "supported_claims": 4,
+            "total_claims": 4
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 0.6,
+              "redundancy": 0.09813606595384486,
+              "budget": 0.028686038643478178
+            },
+            "raw_response": "Breadth: 3 topics, Redundancy: 0.10, Budget: 0.03"
+          }
+        },
+        "wikipedia": {
+          "top_results": [
+            "SearchResult(title='Visual Studio', url='https://en.wikipedia.org/wiki/Visual_Studio', snippet='<p class=\"mw-empty-elt\">\\n</p>\\n\\n<p><b>Visual Studio</b> is an integrated development environment (IDE) developed by Microsoft. It is used to develop computer programs including websites, web apps, web services and mobile apps. Visual Studio uses Microsoft software development platforms including Windows API, Windows Forms, Windows Presentation Foundation (WPF), Microsoft Store and Microsoft Silverlight. It can produce both native code and managed code.\\n</p><p>Visual Studio includes a code editor ', provider='wikipedia')",
+            "SearchResult(title='Differential privacy', url='https://en.wikipedia.org/wiki/Differential_privacy', snippet='<p><b>Differential privacy</b> (<b>DP</b>) is a mathematically rigorous framework for releasing statistical information about datasets while protecting the privacy of individual data subjects. It enables a data holder to share aggregate patterns of the group while limiting information that is leaked about specific individuals. This is done by injecting carefully calibrated noise into statistical computations such that the utility of the statistic is preserved while provably limiting what can be ', provider='wikipedia')",
+            "SearchResult(title='Cohort analysis', url='https://en.wikipedia.org/wiki/Cohort_analysis', snippet='<p><b>Cohort analysis</b> is a kind of behavioral analytics that breaks the data in a data set into related groups before analysis. These groups, or cohorts, usually share common characteristics or experiences within a defined time-span.  Cohort analysis allows a company to \"see patterns clearly across the life-cycle of a customer (or user), rather than slicing across all customers blindly without accounting for the natural cycle that a customer undergoes.\"  By seeing these patterns of time, a c', provider='wikipedia')",
+            "SearchResult(title='Lattice problem', url='https://en.wikipedia.org/wiki/Lattice_problem', snippet='<p>In computer science, <b>lattice problems</b> are a class of optimization problems related to mathematical objects called <i>lattices</i>.  The conjectured intractability of such problems is central to the construction of secure lattice-based cryptosystems: lattice problems are an example of NP-hard problems which have been shown to be average-case hard, providing a test case for the security of cryptographic algorithms.  In addition, some lattice problems which are worst-case hard can be used', provider='wikipedia')",
+            "SearchResult(title='Large language model', url='https://en.wikipedia.org/wiki/Large_language_model', snippet='<p>A <b>large language model</b> (<b>LLM</b>) is a language model trained with self-supervised machine learning on a vast amount of text, designed for natural language processing tasks, especially language generation.\\n</p><p>The largest and most capable LLMs are generative pre-trained transformers (GPTs), based on a transformer architecture, which are largely used in generative chatbots such as ChatGPT, Gemini and Claude. LLMs can be fine-tuned for specific tasks or guided by prompt engineering.', provider='wikipedia')"
+          ],
+          "evaluation": 0.7106666666666668,
+          "timing": "TimingStats(search_ms=0.0, embed_ms=0.0, rerank_ms=0.0, judge_ms=0.0, total_ms=106325.56796073914)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 33.583,
+            "per_doc_p95_us": 1773.434,
+            "docs_scored": 46
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 0.2777777777777778,
+            "attr_recall": 1.0,
+            "supported_sentences": 5,
+            "total_sentences": 18,
+            "claim_precision": 0.29411764705882354,
+            "claim_recall": 1.0,
+            "supported_claims": 5,
+            "total_claims": 17
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 0.2,
+              "redundancy": 0.07770751175238019,
+              "budget": 0.007994469785887361
+            },
+            "raw_response": "Breadth: 1 topics, Redundancy: 0.08, Budget: 0.01"
+          }
+        },
+        "ablation_config": {
+          "late": "on",
+          "prune": "8/32",
+          "name": "Late-interaction, 8/32 pruning"
+        }
+      }
+    ],
+    "timestamp": 1757405895.2282932
+  },
+  "timestamp": 1757405895.234189
+}

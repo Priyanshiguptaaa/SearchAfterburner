@@ -2,10 +2,12 @@
 
 import httpx
 import json
+import asyncio
 from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
 import time
 import logging
+from .net import HedgedSession, NetworkConfig, hedge_search_requests
 
 logger = logging.getLogger(__name__)
 
@@ -326,9 +328,22 @@ def search_multiple_providers(
     providers: List[str], 
     query: str, 
     max_results: int = 50,
+    use_hedging: bool = False,
     **kwargs
 ) -> Dict[str, List[SearchResult]]:
     """Search using multiple providers and return results grouped by provider."""
+    if use_hedging:
+        return asyncio.run(_hedged_search_multiple_providers(providers, query, max_results, **kwargs))
+    else:
+        return _sync_search_multiple_providers(providers, query, max_results, **kwargs)
+
+def _sync_search_multiple_providers(
+    providers: List[str], 
+    query: str, 
+    max_results: int = 50,
+    **kwargs
+) -> Dict[str, List[SearchResult]]:
+    """Synchronous search using multiple providers."""
     results = {}
     
     for provider_name in providers:
@@ -338,5 +353,85 @@ def search_multiple_providers(
         except Exception as e:
             logger.error(f"Provider {provider_name} failed: {e}")
             results[provider_name] = []
+    
+    return results
+
+async def _hedged_search_multiple_providers(
+    providers: List[str], 
+    query: str, 
+    max_results: int = 50,
+    **kwargs
+) -> Dict[str, List[SearchResult]]:
+    """Asynchronous hedged search using multiple providers."""
+    results = {}
+    
+    # Create hedged session
+    config = NetworkConfig(
+        timeout_ms=5000,
+        hedge_delay_ms=100,
+        max_retries=2
+    )
+    
+    async with HedgedSession(config) as session:
+        # Try hedged approach first
+        try:
+            hedged_result = await hedge_search_requests(query, providers, session)
+            if hedged_result.get("success"):
+                # Process hedged result
+                provider_name = hedged_result.get("url", "unknown")
+                if "duckduckgo" in provider_name:
+                    provider_name = "ddg"
+                elif "wikipedia" in provider_name:
+                    provider_name = "wikipedia"
+                
+                # Convert to SearchResult format
+                data = hedged_result.get("data", {})
+                if isinstance(data, dict) and "results" in data:
+                    results[provider_name] = [
+                        SearchResult(
+                            title=item.get("title", ""),
+                            url=item.get("url", ""),
+                            snippet=item.get("snippet", ""),
+                            provider=provider_name
+                        )
+                        for item in data["results"][:max_results]
+                    ]
+                else:
+                    # Fallback to individual provider searches
+                    results = await _async_search_providers(providers, query, max_results, **kwargs)
+            else:
+                # Fallback to individual provider searches
+                results = await _async_search_providers(providers, query, max_results, **kwargs)
+        except Exception as e:
+            logger.warning(f"Hedged search failed: {e}, falling back to individual providers")
+            results = await _async_search_providers(providers, query, max_results, **kwargs)
+    
+    return results
+
+async def _async_search_providers(
+    providers: List[str], 
+    query: str, 
+    max_results: int = 50,
+    **kwargs
+) -> Dict[str, List[SearchResult]]:
+    """Search individual providers asynchronously."""
+    results = {}
+    
+    async def search_provider(provider_name: str):
+        try:
+            provider = get_provider(provider_name, **kwargs)
+            # Run sync search in thread pool
+            loop = asyncio.get_event_loop()
+            return provider_name, await loop.run_in_executor(None, provider.search, query, max_results)
+        except Exception as e:
+            logger.error(f"Provider {provider_name} failed: {e}")
+            return provider_name, []
+    
+    # Run all providers concurrently
+    tasks = [search_provider(name) for name in providers]
+    provider_results = await asyncio.gather(*tasks)
+    
+    for provider_name, search_results in provider_results:
+        results[provider_name] = search_results
     
     return results

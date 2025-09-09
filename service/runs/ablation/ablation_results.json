@@ -1,0 +1,14 @@
+{
+  "timestamp": 1757405966.642658,
+  "queries": [
+    "Test query 1",
+    "Test query 2"
+  ],
+  "providers": [
+    "ddg,wikipedia"
+  ],
+  "topk": 5,
+  "num_runs": 1,
+  "results": [],
+  "comparison": {}
+}

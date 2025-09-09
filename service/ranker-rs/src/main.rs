@@ -187,14 +187,27 @@ async fn handle_bench(Query(params): Query<BenchParams>) -> Result<Json<BenchRes
     let (_, _, perf) = score_docs(&q_tokens, &d_tokens, n_docs, &prune_config);
     let total_time = start_time.elapsed().as_secs_f32() * 1000.0;
     
-    // Detect CPU flags (simplified)
-    let cpu_flags = if std::arch::is_x86_feature_detected!("avx512f") {
-        "AVX-512"
-    } else if std::arch::is_x86_feature_detected!("avx2") {
-        "AVX2"
-    } else {
-        "SSE"
-    };
+    // Detect CPU flags (comprehensive)
+    let mut cpu_flags = Vec::new();
+    if std::arch::is_x86_feature_detected!("avx512f") {
+        cpu_flags.push("AVX-512");
+    }
+    if std::arch::is_x86_feature_detected!("avx2") {
+        cpu_flags.push("AVX2");
+    }
+    if std::arch::is_x86_feature_detected!("avx") {
+        cpu_flags.push("AVX");
+    }
+    if std::arch::is_x86_feature_detected!("sse4.1") {
+        cpu_flags.push("SSE4.1");
+    }
+    if std::arch::is_x86_feature_detected!("sse2") {
+        cpu_flags.push("SSE2");
+    }
+    if cpu_flags.is_empty() {
+        cpu_flags.push("BASIC");
+    }
+    let cpu_flags_str = cpu_flags.join(",");
     
     let threads = rayon::current_num_threads();
     
@@ -208,7 +221,7 @@ async fn handle_bench(Query(params): Query<BenchParams>) -> Result<Json<BenchRes
         p50_ms: perf.per_doc_ms_p50,
         p95_ms: perf.per_doc_ms_p95,
         threads,
-        cpu_flags: cpu_flags.to_string(),
+        cpu_flags: cpu_flags_str,
     };
     
     Ok(Json(response))
