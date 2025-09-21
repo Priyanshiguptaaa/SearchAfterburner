@@ -10,6 +10,13 @@ This tool lets you:
 - Test how token pruning affects both speed and quality
 - Generate detailed reports with performance metrics
 
+## Demo Mode
+
+The system includes demo components for testing:
+- **Baseline Provider**: Generates 15 dummy search results with titles like "Baseline Result 1 for 'query'"
+- **Mock Embedder**: Creates random normalized embeddings when sentence-transformers isn't available
+- These allow you to test the reranking pipeline without requiring real search APIs or embedding models
+
 ## Quick Start
 
 ### Prerequisites
