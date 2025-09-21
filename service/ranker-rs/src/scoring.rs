@@ -120,7 +120,7 @@ pub fn score_docs(
     
     // Prune query tokens (SIGIR 2025: lossless token pruning)
     let pruned_q = prune_tokens(q_tokens, prune_config.q_max, &prune_config.method);
-    let q_pruning_ratio = 1.0 - (pruned_q.len() as f32 / q_tokens.len() as f32);
+    let _q_pruning_ratio = 1.0 - (pruned_q.len() as f32 / q_tokens.len() as f32);
     
     let q_matrix = DMatrix::from_row_slice(
         pruned_q.len(),

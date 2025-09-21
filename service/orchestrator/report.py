@@ -48,7 +48,12 @@ def print_console_summary(results: Dict[str, Any]):
                 continue
                 
             if isinstance(data, dict) and 'evaluation' in data:
-                score = data['evaluation']
+                evaluation = data['evaluation']
+                # Extract score from evaluation (could be a dict or float)
+                if isinstance(evaluation, dict):
+                    score = evaluation.get('total', 0.0)
+                else:
+                    score = float(evaluation) if evaluation else 0.0
                 
                 if score > best_score:
                     best_score = score
@@ -182,7 +187,12 @@ def generate_markdown_report(results: Dict[str, Any], trace_data: Dict[str, Any]
                 continue
                 
             if isinstance(data, dict) and 'evaluation' in data:
-                score = data['evaluation']
+                evaluation = data['evaluation']
+                # Extract score from evaluation (could be a dict or float)
+                if isinstance(evaluation, dict):
+                    score = evaluation.get('total', 0.0)
+                else:
+                    score = float(evaluation) if evaluation else 0.0
                 timing_str = data.get('timing', '')
                 top_results = data.get('top_results', [])
                 
@@ -291,7 +301,12 @@ def create_summary_stats(results: Dict[str, Any]) -> Dict[str, Any]:
                 
             if isinstance(data, dict) and 'evaluation' in data:
                 stats["total_providers"] += 1
-                score = data['evaluation']
+                evaluation = data['evaluation']
+                # Extract score from evaluation (could be a dict or float)
+                if isinstance(evaluation, dict):
+                    score = evaluation.get('total', 0.0)
+                else:
+                    score = float(evaluation) if evaluation else 0.0
                 
                 if score > stats["best_score"]:
                     stats["best_score"] = score

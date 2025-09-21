@@ -117,3 +117,245 @@ cd ranker-rs && cargo run --release &
 cd ranker-rs && cargo run --release
 cargo run --release &
 cd ranker-rs && cargo run --release &
+lsof -i :8088
+kill 999
+sleep 3 && curl -s http://localhost:8088/bench
+ps aux | grep ranker-rs
+curl -s "http://localhost:8088/bench?n_docs=100&td=32&d=64&prune=16/32" | head -20
+curl -X POST http://localhost:8088/rerank -H "Content-Type: application/json" -d '{"q_tokens":[[0.1,0.2,0.3],[0.4,0.5,0.6]],"d_tokens":[[[0.1,0.2,0.3],[0.4,0.5,0.6]],[[0.7,0.8,0.9],[1.0,1.1,1.2]]],"topk":2,"prune":{"q_max":2,"d_max":2,"method":"idf_norm"}}' | head -10
+cd service/orchestrator && python run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5
+which python3 && python3 --version
+cd .. && source .venv/bin/activate && cd orchestrator && python3 run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5
+rm -rf data
+cd exa-showdown && rm -rf ranker-rs/target
+rm -f *.png && rm -rf data
+chmod +x demo_ablation.sh
+source .venv/bin/activate && python3 orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers ddg,wikipedia --late --prune --judge heuristic --seed 42
+source .venv/bin/activate && python3 orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers ddg,wikipedia --late --prune --judge heuristic --seed 42
+cd exa-showdown && sleep 3 && source .venv/bin/activate && python3 orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers ddg,wikipedia --late --prune --judge heuristic --seed 42
+sleep 3 && source .venv/bin/activate && python3 orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers ddg,wikipedia --late --prune --judge heuristic --seed 42
+source .venv/bin/activate && python3 orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers ddg,wikipedia --late --prune --judge heuristic --seed 42
+cd ranker-rs && cargo build --release
+cd exa-showdown && sleep 3 && source .venv/bin/activate && python3 orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers ddg,wikipedia --late on --prune 16/64 --judge heuristic --seed 1337
+cd .. && sleep 3 && source .venv/bin/activate && python3 orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers ddg,wikipedia --late on --prune 16/64 --judge heuristic --seed 1337
+source .venv/bin/activate && python3 orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers ddg,wikipedia --late on --prune 16/64 --judge heuristic --seed 1337
+source .venv/bin/activate && python3 orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers ddg,wikipedia --late on --prune 16/64 --judge heuristic --seed 1337
+source .venv/bin/activate && python3 orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers ddg,wikipedia --late on --prune 16/64 --judge heuristic --seed 1337
+source .venv/bin/activate && python3 orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers ddg,wikipedia --late on --prune 16/64 --judge heuristic --seed 1337
+source .venv/bin/activate && python3 orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers ddg,wikipedia --late on --prune 16/64 --judge heuristic --seed 1337
+source .venv/bin/activate && python3 orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers ddg,wikipedia --late on --prune 16/64 --judge heuristic --seed 1337
+sleep 5 && curl "http://localhost:8088/bench?n_docs=100&td=64&d=128&prune=16/64"
+ps aux | grep ranker
+sleep 10 && curl "http://localhost:8088/bench?n_docs=100&td=64&d=128&prune=16/64"
+cd ranker-rs && cargo run --release 2>&1 | head -20
+sleep 3 && curl "http://localhost:8088/bench?n_docs=100&td=64&d=128&prune=16/64"
+cd .. && source .venv/bin/activate && python3 orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers ddg,wikipedia --late on --prune 16/64 --judge heuristic --seed 1337
+curl "http://localhost:8088/bench?n_docs=1000&td=64&d=128&prune=16/64"
+ls -la *.md *.json
+head -20 report.md
+chmod +x demo.sh
+chmod +x quick_demo.sh
+./quick_demo.sh
+ls -la *.md *.json
+cat report.md
+head -50 results.json
+tail -20 report.md
+chmod +x full_demo.sh
+chmod +x terminal_demo.sh
+./terminal_demo.sh
+./terminal_demo.sh
+./terminal_demo.sh
+./terminal_demo.sh
+echo "ðƒ¿ƒ®¯ **SEARCH QUALITY EVALUATION SYSTEM WITH SIGIR 2025 OPTIMIZATIONS**\
+\
+**What This System Does:**\
+1. **Evaluates Search Engines**: Compares DuckDuckGo vs Wikipedia search quality\
+2. **Uses SIGIR 2025 Research**: Implements lossless token pruning for late-interaction reranking\
+3. **Shows Speed vs Quality Tradeoffs**: Demonstrates how pruning affects both performance and accuracy\
+\
+**The Innovation (SIGIR 2025):**\
+- **Late-Interaction Reranking**: MaxSim (ColBERT-style) instead of simple cosine similarity\
+- **Lossless Token Pruning**: Keep only the most important tokens using idf Ãƒ· L2_norm\
+- **Real Performance Data**: Actual p50/p95 timing from Rust service\
+\
+**What We're Comparing:**\
+- Single-vector baseline (fast, less accurate)\
+- Late-interaction, no pruning (accurate, slow)  \
+- Late-interaction, 16/64 pruning (balanced)\
+- Late-interaction, 8/32 pruning (fastest)\
+\
+**Business Value for Exa:**\
+- Faster search with same quality\
+- Real evaluation of search providers\
+- Cutting-edge research implementation\
+- Production-ready performance metrics\
+\
+Let's run the demo to see the real results..."
+python orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5 --verbose
+ps aux | grep ranker
+python orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5
+python orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5
+python orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5
+rm -f demo.sh full_demo.sh quick_demo.sh launch_demo.sh demo_ablation.sh backend_server.py test_real_api.py demo_dashboard.html
+rm -rf ranker-rs/target
+ls -la
+find . -name "*.py" -o -name "*.rs" -o -name "*.toml" -o -name "*.sh" -o -name "*.md" | grep -v __pycache__ | sort
+find . -maxdepth 2 -name "*.py" -o -name "*.rs" -o -name "*.toml" -o -name "*.sh" -o -name "*.md" | grep -v ".venv" | sort
+ls -la
+python orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5
+python orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5
+python orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5
+python orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5
+python orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5
+python orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5
+python orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5
+python orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5
+python orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5
+python orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5
+python orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5 --protocol both --attr on --agent_judge on
+python orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5 --protocol both --attr on --agent_judge on
+python orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5 --protocol both --attr on --agent_judge on
+python orchestrator/run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5 --protocol both --attr on --agent_judge on
+[200~mkdir -p /Users/priyanshigupta/Hackathons/LateInteractionReranker/service/tools~
+cd /Users/priyanshigupta/Hackathons/LateInteractionReranker/service && mkdir -p tools
+chmod +x tools/ablate.py
+cd orchestrator && python run.py --q "Test query for metrics" --providers "ddg,wikipedia" --judge heuristic --topk 5
+which python3
+python3 run.py --q "Test query for metrics" --providers "ddg,wikipedia" --judge heuristic --topk 5
+pip3 install httpx numpy scikit-learn tabulate duckduckgo-search
+cd /Users/priyanshigupta/Hackathons/LateInteractionReranker/service && python3 -m venv .venv
+cd /Users/priyanshigupta/Hackathons/LateInteractionReranker/service && ls -la
+source .venv/bin/activate && pip install -r requirements.txt
+cd orchestrator && python3 run.py --q "Test query for metrics" --providers "ddg,wikipedia" --judge heuristic --topk 5
+python3 run.py --q "Test query for metrics" --providers "ddg,wikipedia" --judge heuristic --topk 5
+ls -la runs/
+cat runs/run_1757405788/trace.json | head -50
+cd .. && python3 tools/ablate.py --queries "Test query 1" "Test query 2" --providers "ddg,wikipedia" --topk 5 --runs 2
+python3 tools/ablate.py --queries "Test query 1" "Test query 2" --providers "ddg,wikipedia" --topk 5 --runs 1
+mkdir -p orchestrator/net
+mkdir -p orchestrator/cache
+mkdir -p orchestrator/streaming
+mkdir -p orchestrator/filtering
+mkdir -p orchestrator/adaptive
+mkdir -p orchestrator/cascade
+mkdir -p orchestrator/guardrails
+sleep 5 && curl -X GET "http://localhost:8088/bench?n_docs=50&td=32&d=128&prune=16/64"
+python3 orchestrator/run.py --q "machine learning optimization techniques" --providers "ddg,wikipedia" --topk 10 --judge heuristic --embed local
+python3 orchestrator/run.py --q "machine learning optimization techniques" --providers "ddg,wikipedia" --topk 10 --judge heuristic --embed local
+python3 -m py_compile orchestrator/run.py
+python3 -m py_compile orchestrator/run.py
+python3 -m py_compile orchestrator/run.py
+python3 -m py_compile orchestrator/run.py
+python3 -c "import ast; ast.parse(open('orchestrator/run.py').read())"
+pwd && ls -la
+ps aux | grep ranker-rs
+python3 -c "import ast; ast.parse(open('orchestrator/run.py').read()); print('Syntax OK')"
+sed -n '160,170p' orchestrator/run.py | cat -A
+sed -n '160,170p' orchestrator/run.py
+python3 orchestrator/run.py --q "machine learning optimization techniques" --providers "ddg,wikipedia" --topk 10 --judge heuristic --embed local
+sed -n '185,190p' orchestrator/run.py | hexdump -C
+python3 orchestrator/run.py --q "machine learning optimization techniques" --providers "ddg,wikipedia" --topk 10 --judge heuristic --embed local
+python3 orchestrator/run.py --q "machine learning optimization techniques" --providers "ddg,wikipedia" --topk 10 --judge heuristic --embed local
+python3 orchestrator/run.py --q "machine learning optimization techniques" --providers "ddg,wikipedia" --topk 10 --judge heuristic --embed local
+python3 orchestrator/run.py --q "machine learning optimization techniques" --providers "ddg,wikipedia" --topk 10 --judge heuristic --embed local
+python3 -c "\
+import re\
+\
+# Read the file\
+with open('orchestrator/run.py', 'r') as f:\
+    content = f.read()\
+\
+# Fix all indentation issues systematically\
+lines = content.split('\n')\
+fixed_lines = []\
+in_multiline_string = False\
+string_char = None\
+\
+for i, line in enumerate(lines):\
+    # Skip if we're in a multiline string\
+    if in_multiline_string:\
+        fixed_lines.append(line)\
+        if line.strip().endswith(string_char):\
+            in_multiline_string = False\
+        continue\
+    \
+    # Check for multiline string start\
+    if '"""' in line or \"'''\" in line:\
+        if line.count('\"\"\"') % 2 == 1 or line.count(\"'''\") % 2 == 1:\
+            in_multiline_string = True\
+            string_char = '\"\"\"' if '\"\"\"' in line else \"'''\"\
+        fixed_lines.append(line)\
+        continue\
+    \
+    # Fix specific indentation patterns\
+    if line.strip().startswith('for provider in results:') and i > 0 and 'else:' in lines[i-1]:\
+        # This should be indented under the else block\
+        fixed_lines.append('            ' + line.strip())\
+    elif line.strip().startswith('results[provider] = deduplicate_results') and i > 0 and 'for provider in results:' in lines[i-1]:\
+        # This should be indented under the for loop\
+        fixed_lines.append('                ' + line.strip())\
+    elif line.strip().startswith('query_tokens = self.embedder.embed_query_tokens') and i > 0 and 'else:' in lines[i-1]:\
+        # This should be indented under the else block\
+        fixed_lines.append('                ' + line.strip())\
+    else:\
+        fixed_lines.append(line)\
+\
+# Write the fixed content\
+with open('orchestrator/run.py', 'w') as f:\
+    f.write('\n'.join(fixed_lines))\
+\
+print('Fixed indentation issues')\
+"
+sed -i '' '166s/^        /            /' orchestrator/run.py
+python3 orchestrator/run.py --q "machine learning optimization techniques" --providers "ddg,wikipedia" --topk 10 --judge heuristic --embed local
+python3 orchestrator/run.py --q "machine learning optimization techniques" --providers "ddg,wikipedia" --topk 10 --judge heuristic --embed local
+python3 simple_run.py --q "machine learning optimization techniques" --providers "ddg,wikipedia" --topk 10
+curl -X POST http://localhost:8088/rerank -H "Content-Type: application/json" -d '{"q_tokens":[[0.1,0.2,0.3]],"d_tokens":[[[0.4,0.5,0.6],[0.7,0.8,0.9]]],"topk":1,"prune":{"q_max":16,"d_max":64,"method":"idf_norm"}}'
+python3 ablation_runner.py
+python3 ablation_runner.py
+python3 mock_ablation.py
+curl -X GET "http://localhost:8088/bench?n_docs=100&td=32&d=128&prune=16/64"
+python3 real_ablation.py
+python3 real_ablation.py
+rm -f simple_results.json real_ablation_results.json mock_ablation_results.json ablation_results.json
+python3 simple_run.py --q "machine learning optimization techniques" --providers "ddg,wikipedia" --topk 10
+python3 real_ablation.py
+curl -X GET "http://localhost:8088/bench?n_docs=50&td=32&d=128" | jq
+rm -f real_ablation_results.json simple_results.json
+python3 real_ablation.py
+python3 simple_run.py --q "machine learning optimization techniques" --providers "ddg,wikipedia" --topk 5
+python3 simple_run.py --q "python programming" --providers "ddg,wikipedia" --topk 3
+git stash
+git pull
+git stash pop
+cd .. && git status
+git checkout -b feature/real-ablation-and-optimizations
+git add .
+git commit -m "Add real ablation study"
+git push -u origin feature/real-ablation-and-optimizations
+git checkout main
+git stash
+git checkout main
+git pull origin main
+git status && echo "---" && git branch -a
+cd service
+ls
+cd ranker-rs
+cargo run --release
+cd ranker-rs && cargo run --release &
+source .venv/bin/activate
+cd service
+source .venv/bin/activate
+cd orchestrator && python3 run.py --q "Challenges in evaluating LLM-powered search quality" --providers "ddg,wikipedia" --judge heuristic --topk 5
+ls
+git add .
+git status
+git commit -m "Adding service"
+git push
+git add .
+git status
+git commit -m "Adding readme"
+git push
+git pull
+cd exa-showdown/ranker-rs && ./target/release/ranker-rs &
+cd service/ranker-rs && cargo run --release

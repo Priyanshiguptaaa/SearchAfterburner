@@ -1,0 +1,205 @@
+{
+  "query": "test query",
+  "providers": [
+    "baseline"
+  ],
+  "topk": 3,
+  "results": {
+    "query": "test query",
+    "providers": [
+      "baseline"
+    ],
+    "ablation_results": [
+      {
+        "baseline": {
+          "top_results": [
+            "SearchResult(title=\"Baseline Result 10 for 'test query'\", url='https://baseline.com/result10', snippet=\"This is a baseline search result 10 for the query 'test query'. It represents a simple search approach.\", provider='baseline')",
+            "SearchResult(title=\"Baseline Result 7 for 'test query'\", url='https://baseline.com/result7', snippet=\"This is a baseline search result 7 for the query 'test query'. It represents a simple search approach.\", provider='baseline')",
+            "SearchResult(title=\"Baseline Result 15 for 'test query'\", url='https://baseline.com/result15', snippet=\"This is a baseline search result 15 for the query 'test query'. It represents a simple search approach.\", provider='baseline')"
+          ],
+          "evaluation": {},
+          "timing": "TimingStats(search_ms=308.2611560821533, embed_ms=324.3989944458008, rerank_ms=0.0, judge_ms=0.10204315185546875, total_ms=632.7080726623535)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 18.659001,
+            "per_doc_p95_us": 35.320003,
+            "docs_scored": 15
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 0.5,
+            "attr_recall": 1.0,
+            "supported_sentences": 3,
+            "total_sentences": 6,
+            "claim_precision": 1.0,
+            "claim_recall": 1.0,
+            "supported_claims": 3,
+            "total_claims": 3
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 0.2,
+              "redundancy": 0.8888888888888888,
+              "budget": 1.0
+            },
+            "raw_response": "Breadth: 1 topics, Redundancy: 0.89, Budget: 1.00"
+          }
+        },
+        "ablation_config": {
+          "late": "off",
+          "prune": "none",
+          "name": "Single-vector baseline"
+        }
+      },
+      {
+        "baseline": {
+          "top_results": [
+            "SearchResult(title=\"Baseline Result 4 for 'test query'\", url='https://baseline.com/result4', snippet=\"This is a baseline search result 4 for the query 'test query'. It represents a simple search approach.\", provider='baseline')",
+            "SearchResult(title=\"Baseline Result 3 for 'test query'\", url='https://baseline.com/result3', snippet=\"This is a baseline search result 3 for the query 'test query'. It represents a simple search approach.\", provider='baseline')",
+            "SearchResult(title=\"Baseline Result 12 for 'test query'\", url='https://baseline.com/result12', snippet=\"This is a baseline search result 12 for the query 'test query'. It represents a simple search approach.\", provider='baseline')"
+          ],
+          "evaluation": {},
+          "timing": "TimingStats(search_ms=312.8058910369873, embed_ms=46.034812927246094, rerank_ms=0.0, judge_ms=0.05507469177246094, total_ms=358.8850498199463)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 16.992,
+            "per_doc_p95_us": 37.623,
+            "docs_scored": 15
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 0.5,
+            "attr_recall": 1.0,
+            "supported_sentences": 3,
+            "total_sentences": 6,
+            "claim_precision": 1.0,
+            "claim_recall": 1.0,
+            "supported_claims": 3,
+            "total_claims": 3
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 0.2,
+              "redundancy": 0.8888888888888888,
+              "budget": 1.0
+            },
+            "raw_response": "Breadth: 1 topics, Redundancy: 0.89, Budget: 1.00"
+          }
+        },
+        "ablation_config": {
+          "late": "on",
+          "prune": "none",
+          "name": "Late-interaction, no pruning"
+        }
+      },
+      {
+        "baseline": {
+          "top_results": [
+            "SearchResult(title=\"Baseline Result 14 for 'test query'\", url='https://baseline.com/result14', snippet=\"This is a baseline search result 14 for the query 'test query'. It represents a simple search approach.\", provider='baseline')",
+            "SearchResult(title=\"Baseline Result 7 for 'test query'\", url='https://baseline.com/result7', snippet=\"This is a baseline search result 7 for the query 'test query'. It represents a simple search approach.\", provider='baseline')",
+            "SearchResult(title=\"Baseline Result 9 for 'test query'\", url='https://baseline.com/result9', snippet=\"This is a baseline search result 9 for the query 'test query'. It represents a simple search approach.\", provider='baseline')"
+          ],
+          "evaluation": {},
+          "timing": "TimingStats(search_ms=307.52110481262207, embed_ms=45.14789581298828, rerank_ms=0.0, judge_ms=0.10204315185546875, total_ms=352.7090549468994)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 31.121999000000002,
+            "per_doc_p95_us": 57.001002,
+            "docs_scored": 15
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 0.5,
+            "attr_recall": 1.0,
+            "supported_sentences": 3,
+            "total_sentences": 6,
+            "claim_precision": 1.0,
+            "claim_recall": 1.0,
+            "supported_claims": 3,
+            "total_claims": 3
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 0.2,
+              "redundancy": 0.8888888888888888,
+              "budget": 1.0
+            },
+            "raw_response": "Breadth: 1 topics, Redundancy: 0.89, Budget: 1.00"
+          }
+        },
+        "ablation_config": {
+          "late": "on",
+          "prune": "16/64",
+          "name": "Late-interaction, 16/64 pruning"
+        }
+      },
+      {
+        "baseline": {
+          "top_results": [
+            "SearchResult(title=\"Baseline Result 12 for 'test query'\", url='https://baseline.com/result12', snippet=\"This is a baseline search result 12 for the query 'test query'. It represents a simple search approach.\", provider='baseline')",
+            "SearchResult(title=\"Baseline Result 14 for 'test query'\", url='https://baseline.com/result14', snippet=\"This is a baseline search result 14 for the query 'test query'. It represents a simple search approach.\", provider='baseline')",
+            "SearchResult(title=\"Baseline Result 5 for 'test query'\", url='https://baseline.com/result5', snippet=\"This is a baseline search result 5 for the query 'test query'. It represents a simple search approach.\", provider='baseline')"
+          ],
+          "evaluation": {},
+          "timing": "TimingStats(search_ms=304.8267364501953, embed_ms=45.74298858642578, rerank_ms=0.0, judge_ms=0.13709068298339844, total_ms=350.6507873535156)",
+          "rerank_performance": {
+            "total_ms": 0.0,
+            "per_doc_p50_us": 28.889999,
+            "per_doc_p95_us": 38.335003,
+            "docs_scored": 15
+          },
+          "pairwise_results": {
+            "pairwise_results": [],
+            "flip_rate": 0.0,
+            "trials": 0,
+            "distractor_win_rate": 0.0
+          },
+          "attribution_results": {
+            "attr_precision": 0.5,
+            "attr_recall": 1.0,
+            "supported_sentences": 3,
+            "total_sentences": 6,
+            "claim_precision": 1.0,
+            "claim_recall": 1.0,
+            "supported_claims": 3,
+            "total_claims": 3
+          },
+          "agent_judge_results": {
+            "protocol": "agent_judge",
+            "scores": {
+              "breadth": 0.2,
+              "redundancy": 0.8888888888888888,
+              "budget": 1.0
+            },
+            "raw_response": "Breadth: 1 topics, Redundancy: 0.89, Budget: 1.00"
+          }
+        },
+        "ablation_config": {
+          "late": "on",
+          "prune": "8/32",
+          "name": "Late-interaction, 8/32 pruning"
+        }
+      }
+    ],
+    "timestamp": 1758427290.36565
+  },
+  "timestamp": 1758427290.3698409
+}

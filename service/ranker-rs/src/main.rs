@@ -7,7 +7,6 @@ use axum::{
 };
 use ranker_rs::scoring::{RerankRequest, RerankResponse, score_docs, PruneConfig};
 use serde::Deserialize;
-use std::collections::HashMap;
 use tower::ServiceBuilder;
 use tower_http::cors::CorsLayer;
 use tracing::{info, error};
